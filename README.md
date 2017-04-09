@@ -3,7 +3,7 @@
 ## Specification
 Project in course Advanced web programming (TDDD27), given at Linköping University
 
-## Functional specification
+### Functional specification
 This web application shall provide a Podcast-feed for its users. The user can create a profile, and subscribe to Podcasts which will be fetched from iTunes. The subscribed podcast will then be presented in the feed as new episodes arrives. For each podcast, the user can potentially like the episode. User should also be able to friend each other, and then friend's likes will also take place in the feed. The users should be able to browse each other's subscriptions, to find inspiration regarding what to listen to.
 
 Note that the application will not do any playing of Podcast, but only provide a space where users can see each other's favorite podcast, and interact with new episode in form of likes, and potentially comments.  
