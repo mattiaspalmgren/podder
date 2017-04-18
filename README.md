@@ -1,6 +1,5 @@
 # podder :radio:
 
-## Specification
 Project in course Advanced web programming (TDDD27), given at Linköping University
 
 ### Functional specification
