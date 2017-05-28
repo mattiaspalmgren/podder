@@ -2,8 +2,10 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 import morgan from 'morgan';
+import request from 'request';
 
 import Podcast from './app/models/podcast';
+import { getLatestPodcasts } from './app/plugins/itunesFetchers';
 import { getPodcasts, postPodcast } from './app/routes/podcast';
 
 const app = express();
@@ -41,8 +43,9 @@ app.route('/podcasts')
   .post(postPodcast)
   .get(getPodcasts);
 
-// For all requests, send to index
+// For all other requests, send to index
 app.route('*').get((req, res) => {
+  getLatestPodcasts()
   res.sendFile('client/dist/index.html', { root: __dirname });
 });
 

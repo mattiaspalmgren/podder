@@ -3,8 +3,10 @@ const Schema  = mongoose.Schema;
 
 const podcastSchema = new Schema(
   {
-    name: String,
-    description: String
+    artistName: String,
+    artistViewUrl: String,
+    artworkUrl: String,
+    genres: Array
   }
 );
 
