@@ -1,0 +1,23 @@
+body {
+  font-family: "Noto Serif", serif;
+}
+
+
+h1 {
+  text-align: center;  
+}
+
+h1, h2, h3, h4 {
+  margin: 0;
+  padding: 0;
+}
+
+h4 {
+  margin-top: 10px;
+  font-size: 0.9em;
+}
+
+.wrapper {
+  margin: 0 auto;
+  max-width: 768px;
+}

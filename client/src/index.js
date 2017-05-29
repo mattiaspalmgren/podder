@@ -1,8 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import App from './components/App';
+import index from './index.scss';
 
-const title = <h1>Podder</h1>;
 ReactDOM.render(
-  title,
+  <App/>,
   document.getElementById('app')
 );
