@@ -17,17 +17,19 @@
   "license": "MIT",
   "scripts": {
     "api": "babel-node server.js",
-    "node": "NODE_ENV=development webpack-dev-server",
-    "build": "NODE_ENV=build webpack"
+    "start": "NODE_ENV=development webpack-dev-server",
+    "build": "NODE_ENV=build webpack --watch"
   },
   "dependencies": {
     "body-parser": "^1.17.1",
     "express": "^4.15.2",
     "mongoose": "^4.9.7",
     "morgan": "^1.8.1",
+    "node-sass": "^4.5.3",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
-    "react-router": "3.0.0"
+    "react-router": "3.0.0",
+    "sass-loader": "^6.0.5"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",

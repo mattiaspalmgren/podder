@@ -7,7 +7,7 @@ const path = require('path');
 const PATHS = {
   src: path.join(__dirname, 'client/src'),
   dist: path.join(__dirname, 'client/dist'),
-  style: path.join(__dirname, 'client/dist/style')
+  style: path.join(__dirname, 'client/src')
 };
 
 const devServer = (options) => {
@@ -46,8 +46,8 @@ const common = {
         use: ['babel-loader']
       },
       {
-        test: /\.css$/,
-        use: ['style-loader', 'css-loader'],
+        test: /\.scss$/,
+        use: ['style-loader', 'css-loader', 'sass-loader'],
         include: PATHS.css
       }
     ]
