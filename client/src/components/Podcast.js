@@ -1,12 +1,16 @@
 import React, { Component } from 'react';
 import classNames from 'classnames';
+import Svg from './Svg';
 
 class Podcast extends Component {
   constructor (props) {
     super(props);
     this.toggleHoverState = this.toggleHoverState.bind(this);
+    this.toggleSavedState = this.toggleSavedState.bind(this);
+    this.renderIcon = this.renderIcon.bind(this);
     this.state = {
-      hover: false
+      hover: false,
+      saved: false
     }
   }
 
@@ -14,6 +18,18 @@ class Podcast extends Component {
     const type = e.type;
     const hover = type === 'mouseenter' ? true : false 
     this.setState({hover: hover })
+  }
+
+  toggleSavedState() {
+    this.setState({saved: !this.state.saved })
+  }
+
+  renderIcon() {
+    if (this.state.saved) {
+      return <Svg color={'red'} type={'cross'}/>
+    } else {
+      return <Svg color={'green'} type={'checkmark'}/>
+    }
   }
 
   render () {
@@ -32,7 +48,10 @@ class Podcast extends Component {
           onMouseEnter={this.toggleHoverState}
           onMouseLeave={this.toggleHoverState}>
           <img src={podcast.artworkUrl} />
-          <div className={hoverClasses}>
+          <div className={hoverClasses} onClick={this.toggleSavedState}>
+            { 
+              this.renderIcon() 
+            }
           </div>
         </div>
         <h4>{podcast.artistName}</h4>

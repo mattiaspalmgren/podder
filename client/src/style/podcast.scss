@@ -9,13 +9,14 @@
 }
 
 .podcast__overlay {
+  display: none;
   position: absolute;
   width: 100%;
   height: 100%;
   &--show {
-    display: block;
-    background: black;
-    opacity: 0.7;
-    z-index: 3000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(1,1,1,0.8);
   }
 }
