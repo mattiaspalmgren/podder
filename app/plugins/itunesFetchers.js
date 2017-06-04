@@ -9,7 +9,7 @@ const getLatestPodcasts = () => {
         return {
           artistName: podcast.artistName,
           artistViewUrl: podcast.artistViewUrl,
-          artworkUrl: podcast.artworkUrl100,
+          artworkUrl: podcast.artworkUrl600,
           genres: podcast.genres
         };
       });

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Header from './Header';
-import Podcasts from './Podcasts';
+import PodcastList from './PodcastList';
 
 class App extends Component {
   constructor (props) {
@@ -20,7 +20,7 @@ class App extends Component {
     return (
       <div className="wrapper">
         <Header/>
-        <Podcasts podcasts={this.state.podcasts}/>
+        <PodcastList podcasts={this.state.podcasts}/>
       </div>
     )
   };
