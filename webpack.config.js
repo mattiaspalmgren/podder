@@ -49,6 +49,11 @@ const common = {
         test: /\.scss$/,
         use: ['style-loader', 'css-loader', 'sass-loader'],
         include: PATHS.css
+      },
+      {
+        test: /\.svg$/,
+        loader: 'svg-sprite-loader',
+        include: PATHS.css
       }
     ]
   },

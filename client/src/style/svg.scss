@@ -1,0 +1,11 @@
+.svg-icon {
+  position: relative;
+  display: inline;
+  width: 1em;
+  height: 1em;
+  z-index: 10;
+  &--large {
+    width: 2em;
+    height: 2em;
+  }
+}
