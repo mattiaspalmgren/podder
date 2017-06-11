@@ -10,7 +10,8 @@ class Podcast extends Component {
     this.renderIcon = this.renderIcon.bind(this);
     this.state = {
       hover: false,
-      saved: false
+      saved: false,
+      loaded: false
     }
   }
 
@@ -40,14 +41,25 @@ class Podcast extends Component {
       'podcast__overlay--show': this.state.hover 
     });
 
+    const spinnerClasses = classNames(
+      'spinner', {
+      'spinner--loaded': this.state.loaded 
+    });
+
+    const podcastImageClasses = classNames(
+      'podcast__image', {
+      'podcast__image--loaded': this.state.loaded 
+    });
+    
     return (
       <div 
-        className="col col-3" key={podcast._id}>
+        className="col col-3" key={podcast.collectionId}>
         <div 
           className='podcast grid grid-center grid-middle'
           onMouseEnter={this.toggleHoverState}
           onMouseLeave={this.toggleHoverState}>
-          <img src={podcast.artworkUrl} />
+          <i className={spinnerClasses}></i>
+          <img className={podcastImageClasses} src={podcast.artworkUrl600} onLoad={() => this.setState({loaded:true})}/>
           <div className={hoverClasses} onClick={this.toggleSavedState}>
             { 
               this.renderIcon() 

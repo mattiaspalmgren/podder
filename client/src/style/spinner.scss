@@ -1,0 +1,17 @@
+@include keyframes(spin) {
+  100% { @include transform(rotate(360deg)); }
+}
+
+.spinner {
+  position: absolute;
+  border: $spinner-border-width solid black;
+  border-right-color: transparent;
+  border-radius: 50%;
+  
+  width: $spinner-widht;
+  height: $spinner-height;
+  @include animation(spin .75s linear infinite);
+  &--loaded {
+    display: none;
+  }
+} 

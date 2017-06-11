@@ -45,7 +45,7 @@ app.route('/podcasts')
 
 // For all other requests, send to index
 app.route('*').get((req, res) => {
-  getLatestPodcasts()
+  // getLatestPodcasts()
   res.sendFile('client/dist/index.html', { root: __dirname });
 });
 
