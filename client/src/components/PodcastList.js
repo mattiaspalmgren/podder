@@ -9,7 +9,7 @@ const PodcastList = (props) => {
       {
         podcasts.map((podcast) => {
           return (
-            <Podcast key={podcast._id} podcast={podcast} />
+            <Podcast key={podcast.collectionId} podcast={podcast} />
           )
         })
       }

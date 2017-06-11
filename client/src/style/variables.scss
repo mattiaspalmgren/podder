@@ -3,3 +3,22 @@ $small-gutter: 10px;
 
 /* COLORS */
 $green: #5cb85c;
+$grey: Gainsboro;
+
+/* LAYOUT */
+$border-radius: 3px;
+
+/* ----- COMPONENTS ----- */
+
+/* SEARCH */
+$search-border-width: 1px;
+$search-border-color: $grey;
+$search-padding: 12px 20px;
+$search-width: 100%;
+
+/* SPINNER */
+$spinner-widht: 1em;
+$spinner-height: $spinner-widht; 
+$spinner-border-width: 2px;
+
+
