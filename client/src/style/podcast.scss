@@ -1,13 +1,12 @@
 .gallery {
-  border-top: 1px solid gainsboro;
   padding-top: 2vh;
 }
 
 .podcast {
   position: relative;
   border: 1px solid gainsboro;
+  min-height: $podcast-height;
   @include transition(opacity 150ms);
-  
 }
 
 .podcast__overlay {
