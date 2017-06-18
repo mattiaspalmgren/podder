@@ -1,19 +1,25 @@
 import React, { Component } from 'react';
 import fetchjsonp from 'fetch-jsonp';
 import Header from './Header';
-import PodcastList from './PodcastList';
-import SearchBar from './SearchBar';
+
+// import SearchBar from './SearchBar';
+import Main from './Main';
 
 class App extends Component {
   constructor (props) {
     super(props);
     this.handleSearch = this.handleSearch.bind(this);
+    this.fetchPodcasts = this.fetchPodcasts.bind(this);
     this.state = {
       podcasts: []
     }
   }
   
   componentDidMount() {
+    this.fetchPodcasts();
+  }
+  
+  fetchPodcasts () {
     fetch('http://localhost:8080/podcasts')
       .then(res => res.json())
       .then(res => this.setState({podcasts: res}));
@@ -28,9 +34,11 @@ class App extends Component {
   render () {
     return (
       <div className="wrapper">
-        <Header/>
-        <SearchBar handleSearch={this.handleSearch}/>
-        <PodcastList podcasts={this.state.podcasts}/>
+        <Header />
+        <Main 
+          podcasts={this.state.podcasts}
+          handleSearch={this.handleSearch} 
+        />
       </div>
     )
   };

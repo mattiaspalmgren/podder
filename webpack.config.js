@@ -32,7 +32,7 @@ const devServer = (options) => {
 // Common config among development and build
 const common = {
   entry: {
-    app: PATHS.src
+    app: ['babel-polyfill', PATHS.src]
   },
   output: {
     path: PATHS.dist,
