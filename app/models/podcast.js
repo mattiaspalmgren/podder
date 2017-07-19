@@ -7,6 +7,7 @@ const podcastSchema = new Schema(
     artistViewUrl: String,
     artworkUrl600: String,
     collectionId: Number,
+    feedUrl: String,
     genres: Array
   }
 );

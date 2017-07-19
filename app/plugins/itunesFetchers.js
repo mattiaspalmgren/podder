@@ -11,6 +11,7 @@ const getLatestPodcasts = () => {
           artistViewUrl: podcast.artistViewUrl,
           artworkUrl600: podcast.artworkUrl600,
           collectionId: podcast.collectionId,
+          feedUrl: podcast.feedUrl,
           genres: podcast.genres
         };
       });
