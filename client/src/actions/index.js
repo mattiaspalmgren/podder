@@ -1,13 +1,11 @@
-export const setVisibilityFilter = filter => {
-  return {
+export const setVisibilityFilter = filter => (
+  {
     type: 'SET_VISIBILITY_FILTER',
-    filter
-  }
-}
+    filter,
+  });
 
-export const togglePod = id => {
-  return {
+export const togglePod = id => (
+  {
     type: 'TOGGLE_POD',
-    id
-  }
-}
+    id,
+  });

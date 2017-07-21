@@ -4,24 +4,28 @@ import Podcast from './Podcast';
 
 const PodcastList = ({ podcasts, onPodcastClick }) => (
   <div className="grid gallery">
-    { podcasts && 
-      podcasts.map((podcast) => {
-        return (
-          <Podcast key={podcast.collectionId} {...podcast} podcast={podcast} onClick={() => onPodcastClick(podcast.collectionId)}/>
-        )
-      })
+    { podcasts &&
+      podcasts.map(podcast =>
+        (
+          <Podcast
+            key={podcast.collectionId}
+            {...podcast}
+            podcast={podcast}
+            onClick={() => onPodcastClick(podcast.collectionId)}
+          />
+        ))
     }
   </div>
-)
+);
 
 PodcastList.propTypes = {
   podcasts: PropTypes.arrayOf(
     PropTypes.shape({
       collectionId: PropTypes.number.isRequired,
-      saved: PropTypes.bool.isRequired
-    }).isRequired
+      saved: PropTypes.bool.isRequired,
+    }).isRequired,
   ).isRequired,
-  onPodcastClick: PropTypes.func.isRequired
-}
+  onPodcastClick: PropTypes.func.isRequired,
+};
 
 export default PodcastList;

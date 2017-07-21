@@ -1,8 +1,8 @@
-import { combineReducers } from 'redux'
-import podcasts from './podcasts'
+import { combineReducers } from 'redux';
+import podcasts from './podcasts';
 
 const podder = combineReducers({
-  podcasts
-})
+  podcasts,
+});
 
-export default podder
+export default podder;

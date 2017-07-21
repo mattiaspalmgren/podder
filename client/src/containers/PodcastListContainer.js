@@ -1,33 +1,32 @@
-import { connect } from 'react-redux'
-import { togglePod } from '../actions'
-import PodcastList from '../components/PodcastList'
+import { connect } from 'react-redux';
+import { togglePod } from '../actions';
+import PodcastList from '../components/PodcastList';
 
 const getVisiblePodcasts = (podcasts, filter) => {
   switch (filter) {
-    case 'SHOW_ALL':
-      return podcasts
     case 'SHOW_SAVED':
-      return podcasts.filter(p => p.saved)
+      return podcasts.filter(p => p.saved);
+    default:
+    case 'SHOW_ALL':
+      return podcasts;
   }
-}
+};
 
-const mapStateToProps = (state, ownProps) => {
-  return {
-    podcasts: getVisiblePodcasts(state.podcasts, ownProps.filter)
+const mapStateToProps = (state, ownProps) => (
+  {
+    podcasts: getVisiblePodcasts(state.podcasts, ownProps.filter),
   }
-}
+);
 
-const mapDispatchToProps = dispatch => {
-  return {
-    onPodcastClick: id => {
-      dispatch(togglePod(id))
-    }
+const mapDispatchToProps = dispatch => (
+  {
+    onPodcastClick: id => dispatch(togglePod(id)),
   }
-}
+);
 
 const VisiblePodcastList = connect(
   mapStateToProps,
-  mapDispatchToProps
-)(PodcastList)
+  mapDispatchToProps,
+)(PodcastList);
 
-export default VisiblePodcastList
+export default VisiblePodcastList;
