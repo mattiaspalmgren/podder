@@ -43,17 +43,22 @@ const common = {
       { 
         test: /\.jsx?$/,
         exclude: /node_modules/,
-        use: ['babel-loader']
+        use: {
+          loader: 'babel-loader',
+          options: {
+            plugins: [require('babel-plugin-transform-object-rest-spread')]
+          }
+        }
       },
       {
         test: /\.scss$/,
         use: ['style-loader', 'css-loader', 'sass-loader'],
-        include: PATHS.css
+        include: PATHS.style
       },
       {
         test: /\.svg$/,
         loader: 'svg-sprite-loader',
-        include: PATHS.css
+        include: PATHS.style
       }
     ]
   },
