@@ -1,14 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter } from 'react-router-dom'
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
 
-import App from './components/App';
 import index from './index.scss';
-import icons from './plugins/icons'
+import icons from './plugins/icons';
+import podder from './reducers';
+import Root from './components/Root'
 
-ReactDOM.render((
-  <BrowserRouter>
-    <App/>
-  </BrowserRouter>
-  ), document.getElementById('app')
+let store = createStore(podder, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+
+ReactDOM.render(
+  <Root store={store} />
+  ,document.getElementById('app')
 );

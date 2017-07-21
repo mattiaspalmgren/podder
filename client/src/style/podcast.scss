@@ -1,12 +1,15 @@
 .gallery {
   padding-top: 2vh;
+  min-height: 100px;
 }
 
 .podcast {
   position: relative;
-  border: 1px solid gainsboro;
   min-height: $podcast-height;
   @include transition(opacity 150ms);
+  &--saved {
+    border: 10px solid $green;
+  }
 }
 
 .podcast__overlay {

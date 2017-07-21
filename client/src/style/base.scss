@@ -2,11 +2,17 @@ body {
   font-family: "Noto Serif", serif;
 }
 
-h1 {
-  text-align: center;  
+html {
+  overflow-y: scroll;
 }
 
-h1, h2, h3, h4 {
+h1 {
+  text-align: center; 
+  padding: 0;
+  margin-bottom: $medium-gutter; 
+}
+
+h2, h3, h4 {
   margin: 0;
   padding: 0;
 }
@@ -25,5 +31,5 @@ img {
 
 .wrapper {
   margin: 0 auto;
-  max-width: 768px;
+  max-width: 960px;
 }

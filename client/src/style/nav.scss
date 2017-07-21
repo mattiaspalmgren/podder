@@ -1,0 +1,30 @@
+.nav {
+  border-bottom: 1px solid gainsboro;
+  
+  &__link {
+    &--active {
+      border-bottom: 2px solid orange;
+    }
+  }
+
+  ul {
+    list-style-type: none;
+    height: 100%;
+    overflow: hidden;
+    padding: 0;
+    margin: 0;
+  }
+
+  li { 
+    display: inline-block;
+    float: left;
+    list-style: none;
+  }
+
+  a {
+    display: block;
+    padding: 0 10px 5px 10px;
+    text-decoration: none;
+    color: black;
+  }
+}

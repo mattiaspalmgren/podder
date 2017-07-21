@@ -1,20 +1,27 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Podcast from './Podcast';
 
-const PodcastList = (props) => {
-  const { podcasts } = props;
+const PodcastList = ({ podcasts, onPodcastClick }) => (
+  <div className="grid gallery">
+    { podcasts && 
+      podcasts.map((podcast) => {
+        return (
+          <Podcast key={podcast.collectionId} {...podcast} podcast={podcast} onClick={() => onPodcastClick(podcast.collectionId)}/>
+        )
+      })
+    }
+  </div>
+)
 
-  return (
-    <div className="grid gallery">
-      {
-        podcasts.map((podcast) => {
-          return (
-            <Podcast key={podcast.collectionId} podcast={podcast} />
-          )
-        })
-      }
-    </div>
-  );
-};
+PodcastList.propTypes = {
+  podcasts: PropTypes.arrayOf(
+    PropTypes.shape({
+      collectionId: PropTypes.number.isRequired,
+      saved: PropTypes.bool.isRequired
+    }).isRequired
+  ).isRequired,
+  onPodcastClick: PropTypes.func.isRequired
+}
 
 export default PodcastList;
