@@ -12,8 +12,13 @@ const App = ({ match: { params } }) => (
     <nav className="nav">
       <ul>
         <li>
-          <NavLink exact to={'/SHOW_ALL'} activeClassName={'nav__link--active'}>
-            ALL
+          <NavLink exact to={'/feed'} activeClassName={'nav__link--active'}>
+            FEED
+          </NavLink>
+        </li>
+        <li>
+          <NavLink exact to={'/'} activeClassName={'nav__link--active'}>
+            EXPLORE
           </NavLink>
         </li>
         <li>
@@ -24,7 +29,7 @@ const App = ({ match: { params } }) => (
       </ul>
     </nav>
 
-    <PodcastListContainer filter={params.filter || 'SHOW_ALL'} />
+    <PodcastListContainer filter={params.filter} />
   </div>
 );
 

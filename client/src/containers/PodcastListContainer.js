@@ -7,7 +7,6 @@ const getVisiblePodcasts = (podcasts, filter) => {
     case 'SHOW_SAVED':
       return podcasts.filter(p => p.saved);
     default:
-    case 'SHOW_ALL':
       return podcasts;
   }
 };
