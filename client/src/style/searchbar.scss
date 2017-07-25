@@ -1,6 +1,7 @@
 .searchbar {
   border-radius: $border-radius;
   padding: $search-padding;
+  margin: $large-gutter 0;
   border: $search-border-width solid $search-border-color;
   width: $search-width;
 }

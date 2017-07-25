@@ -10,17 +10,14 @@ class Podcast extends Component {
     };
   }
   render() {
-    const { podcast, saved, onClick } = this.props;
+    const { podcast, onClick } = this.props;
 
     const spinnerClasses = classNames(
       'spinner', {
         'spinner--loaded': this.state.loaded,
       });
 
-    const podcastClasses = classNames(
-      'podcast grid grid-center grid-middle', {
-        'podcast--saved': saved,
-      });
+    const podcastClasses = classNames('podcast grid grid-center grid-middle');
 
     const podcastImageClasses = classNames(
       'podcast__image', {
@@ -46,7 +43,6 @@ class Podcast extends Component {
 Podcast.propTypes = {
   podcast: PropTypes.object.isRequired,
   onClick: PropTypes.func.isRequired,
-  saved: PropTypes.bool.isRequired,
 };
 
 export default Podcast;

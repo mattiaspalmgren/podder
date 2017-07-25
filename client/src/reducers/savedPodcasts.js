@@ -1,6 +1,6 @@
 import podcastsSrc from '../podcastsSrc';
 
-const podcasts = (state = podcastsSrc, action) => {
+const savedPodcasts = (state = podcastsSrc, action) => {
   switch (action.type) {
     case 'TOGGLE_POD':
       return state.map(podcast =>
@@ -13,4 +13,4 @@ const podcasts = (state = podcastsSrc, action) => {
   }
 };
 
-export default podcasts;
+export default savedPodcasts;
