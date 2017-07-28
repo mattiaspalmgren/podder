@@ -1,14 +1,36 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import Svg from '../components/Svg';
 
 class Podcast extends Component {
   constructor(props) {
     super(props);
     this.state = {
       loaded: false,
+      hover: false,
     };
+    this.renderIcon = this.renderIcon.bind(this);
+    this.toggleHoverState = this.toggleHoverState.bind(this);
   }
+
+  toggleHoverState(e) {
+    const type = e.type;
+    const isHovering = type === 'mouseenter';
+    this.setState({ hover: isHovering });
+  }
+
+  renderIcon() {
+    let icon;
+    const { location } = this.props;
+    if (location === '/mine') {
+      icon = <Svg color={'red'} type={'cross'} />;
+    } else {
+      icon = <Svg color={'#16dc02'} type={'checkmark'} />;
+    }
+    return icon;
+  }
+
   render() {
     const { podcast, onClick } = this.props;
 
@@ -24,9 +46,18 @@ class Podcast extends Component {
         'podcast__image--loaded': this.state.loaded,
       });
 
+    const hoverClasses = classNames(
+      'podcast__overlay', {
+        'podcast__overlay--show': this.state.hover,
+      });
+
     return (
       <div className="col col-3" key={podcast.collectionId} onClick={onClick}>
-        <div className={podcastClasses}>
+        <div
+          className={podcastClasses}
+          onMouseEnter={this.toggleHoverState}
+          onMouseLeave={this.toggleHoverState}
+        >
           <i className={spinnerClasses} />
           <img
             className={podcastImageClasses}
@@ -34,6 +65,11 @@ class Podcast extends Component {
             src={podcast.artworkUrl600}
             onLoad={() => this.setState({ loaded: true })}
           />
+          <div className={hoverClasses}>
+            {
+              this.renderIcon()
+            }
+          </div>
         </div>
         <h4>{podcast.artistName}</h4>
       </div>);
@@ -43,6 +79,7 @@ class Podcast extends Component {
 Podcast.propTypes = {
   podcast: PropTypes.object.isRequired,
   onClick: PropTypes.func.isRequired,
+  location: PropTypes.string.isRequired,
 };
 
 export default Podcast;

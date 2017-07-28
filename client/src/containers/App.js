@@ -46,6 +46,7 @@ class App extends Component {
             <PodcastList
               podcasts={foundPodcasts}
               onClick={this.addToCollection}
+              {...this.props}
             />
           </div>
         )}
@@ -57,6 +58,7 @@ class App extends Component {
           <PodcastList
             podcasts={savedPodcasts}
             onClick={this.removeFromCollection}
+            {...this.props}
           />)}
       />
     </div>

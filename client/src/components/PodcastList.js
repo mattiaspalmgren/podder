@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Podcast from './Podcast';
 
-const PodcastList = ({ podcasts, onClick }) => (
+const PodcastList = ({ location: { pathname }, podcasts, onClick }) => (
   <div className="grid gallery">
     { podcasts &&
       podcasts.map(podcast =>
@@ -12,6 +12,7 @@ const PodcastList = ({ podcasts, onClick }) => (
             {...podcast}
             podcast={podcast}
             onClick={() => onClick(podcast)}
+            location={pathname}
           />
         ))
     }
@@ -25,6 +26,7 @@ PodcastList.propTypes = {
     }).isRequired,
   ).isRequired,
   onClick: PropTypes.func.isRequired,
+  location: PropTypes.object.isRequired,
 };
 
 export default PodcastList;

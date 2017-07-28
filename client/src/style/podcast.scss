@@ -15,13 +15,14 @@
 .podcast__overlay {
   display: none;
   position: absolute;
-  width: 100%;
-  height: 100%;
+  min-height: $podcast-height;
   &--show {
+    height: 100%;
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(1,1,1,0.8);
+    background: rgba(1,1,1,0.6);
   }
 }
 
