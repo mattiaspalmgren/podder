@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Route } from 'react-router-dom';
 
-import { fetchPodcasts } from '../actions';
+import { addPodcast, removePodcast, fetchPodcasts } from '../actions';
 import SearchBar from '../components/SearchBar';
 import Header from '../components/Header';
 import Nav from '../components/Nav';
@@ -13,11 +13,23 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.handleSearch = this.handleSearch.bind(this);
+    this.addToCollection = this.addToCollection.bind(this);
+    this.removeFromCollection = this.removeFromCollection.bind(this);
   }
 
   handleSearch(searchTerm) {
     const { handleSearch } = this.props;
     handleSearch(searchTerm);
+  }
+
+  addToCollection(podcast) {
+    const { addToCollection } = this.props;
+    addToCollection(podcast);
+  }
+
+  removeFromCollection(podcast) {
+    const { removeFromCollection } = this.props;
+    removeFromCollection(podcast);
   }
 
   render() {
@@ -31,14 +43,21 @@ class App extends Component {
         render={() => (
           <div>
             <SearchBar handleSearch={this.handleSearch} />
-            <PodcastList podcasts={foundPodcasts} onClick={this.handleSearch} />
+            <PodcastList
+              podcasts={foundPodcasts}
+              onClick={this.addToCollection}
+            />
           </div>
         )}
       />
       <Route
         exact
         path="/mine"
-        render={() => (<PodcastList podcasts={savedPodcasts} onClick={this.handleSearch} />)}
+        render={() => (
+          <PodcastList
+            podcasts={savedPodcasts}
+            onClick={this.removeFromCollection}
+          />)}
       />
     </div>
     );
@@ -49,8 +68,9 @@ App.propTypes = {
   foundPodcasts: PropTypes.array.isRequired,
   handleSearch: PropTypes.func.isRequired,
   savedPodcasts: PropTypes.array.isRequired,
+  addToCollection: PropTypes.func.isRequired,
+  removeFromCollection: PropTypes.func.isRequired,
 };
-
 
 const mapStateToProps = (state) => {
   const { explorePodcasts: { foundPodcasts = [], isFetching = false }, savedPodcasts } = state;
@@ -64,6 +84,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = dispatch => (
   {
     handleSearch: searchTerm => dispatch(fetchPodcasts(searchTerm)),
+    addToCollection: podcast => dispatch(addPodcast(podcast)),
+    removeFromCollection: podcast => dispatch(removePodcast(podcast.collectionId)),
   }
 );
 

@@ -1,13 +1,14 @@
-import podcastsSrc from '../podcastsSrc';
+import {
+  ADD_PODCAST,
+  REMOVE_PODCAST,
+} from '../actions';
 
-const savedPodcasts = (state = podcastsSrc, action) => {
+const savedPodcasts = (state = [], action) => {
   switch (action.type) {
-    case 'TOGGLE_POD':
-      return state.map(podcast =>
-        (
-          (podcast.collectionId === action.id)
-          ? { ...podcast, saved: !podcast.saved } : podcast
-        ));
+    case ADD_PODCAST:
+      return [...state, action.podcast];
+    case REMOVE_PODCAST:
+      return state.filter(pod => pod.collectionId !== action.podcastId);
     default:
       return state;
   }

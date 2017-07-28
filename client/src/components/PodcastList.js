@@ -11,7 +11,7 @@ const PodcastList = ({ podcasts, onClick }) => (
             key={podcast.collectionId}
             {...podcast}
             podcast={podcast}
-            onClick={() => onClick(podcast.collectionId)}
+            onClick={() => onClick(podcast)}
           />
         ))
     }

@@ -3,11 +3,25 @@ import fetch from 'isomorphic-fetch';
 export const SEARCH_TERM = 'SEARCH_TERM';
 export const REQUEST_PODCASTS = 'REQUEST_PODCASTS';
 export const RECEIVE_PODCASTS = 'RECEIVE_PODCASTS';
+export const ADD_PODCAST = 'ADD_PODCAST';
+export const REMOVE_PODCAST = 'REMOVE_PODCAST';
 
 export const togglePod = id => (
   {
     type: 'TOGGLE_POD',
     id,
+  });
+
+export const addPodcast = podcast => (
+  {
+    type: ADD_PODCAST,
+    podcast,
+  });
+
+export const removePodcast = podcastId => (
+  {
+    type: REMOVE_PODCAST,
+    podcastId,
   });
 
 export function requestPodcasts(searchTerm) {
