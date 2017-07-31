@@ -22,15 +22,13 @@ class SearchBar extends Component {
   render() {
     return (
       <div className="grid grid-center">
-        <div className="col col-6">
-          <input
-            className="searchbar"
-            type="text"
-            placeholder="Search..."
-            onChange={this.handleChange}
-            onKeyPress={this.handleKeyPress}
-          />
-        </div>
+        <input
+          className="searchbar col col-6"
+          type="text"
+          placeholder="Search..."
+          onChange={this.handleChange}
+          onKeyPress={this.handleKeyPress}
+        />
       </div>
     );
   }

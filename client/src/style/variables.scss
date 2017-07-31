@@ -9,14 +9,16 @@ $grey: Gainsboro;
 
 /* LAYOUT */
 $border-radius: 3px;
+$max-width: 960px;
+$media-small: 550px;
+$media-medium: 800px;
 
 /* ----- COMPONENTS ----- */
 
 /* SEARCH */
 $search-border-width: 1px;
 $search-border-color: $grey;
-$search-padding: 12px 20px;
-$search-width: 100%;
+$search-padding: $small-gutter $medium-gutter;
 
 /* SPINNER */
 $spinner-widht: 1em;
