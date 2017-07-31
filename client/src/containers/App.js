@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Route } from 'react-router-dom';
+import { Route, Redirect } from 'react-router-dom';
 
 import { addPodcast, removePodcast, fetchPodcasts } from '../actions';
 import SearchBar from '../components/SearchBar';
@@ -34,9 +34,11 @@ class App extends Component {
 
   render() {
     const { foundPodcasts, savedPodcasts } = this.props;
+    const savedPodcastsIds = savedPodcasts.map(p => p.collectionId);
     return (<div className="wrapper">
       <Header />
       <Nav />
+      <Route path="/" render={() => (<Redirect to="/explore" push />)} />
       <Route
         exact
         path="/explore"
@@ -45,6 +47,7 @@ class App extends Component {
             <SearchBar handleSearch={this.handleSearch} />
             <PodcastList
               podcasts={foundPodcasts}
+              savedPodcastsIds={savedPodcastsIds}
               onClick={this.addToCollection}
               {...this.props}
             />
