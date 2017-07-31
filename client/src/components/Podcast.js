@@ -22,24 +22,27 @@ class Podcast extends Component {
 
   renderIcon() {
     let icon;
-    const { location } = this.props;
-    if (location === '/mine') {
-      icon = <Svg color={'red'} type={'cross'} />;
+    const { saved } = this.props;
+    if (saved) {
+      icon = <Svg color={'orange'} type={'cross'} />;
     } else {
-      icon = <Svg color={'#16dc02'} type={'checkmark'} />;
+      icon = <Svg color={'orange'} type={'checkmark'} />;
     }
     return icon;
   }
 
   render() {
-    const { podcast, onClick } = this.props;
+    const { podcast, onClick, saved } = this.props;
 
     const spinnerClasses = classNames(
       'spinner', {
         'spinner--loaded': this.state.loaded,
       });
 
-    const podcastClasses = classNames('podcast grid grid-center grid-middle');
+    const podcastClasses = classNames(
+      'podcast grid grid-center grid-middle', {
+        'podcast--saved': saved,
+      });
 
     const podcastImageClasses = classNames(
       'podcast__image', {
@@ -79,7 +82,7 @@ class Podcast extends Component {
 Podcast.propTypes = {
   podcast: PropTypes.object.isRequired,
   onClick: PropTypes.func.isRequired,
-  location: PropTypes.string.isRequired,
+  saved: PropTypes.bool,
 };
 
 export default Podcast;

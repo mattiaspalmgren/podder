@@ -2,21 +2,24 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Podcast from './Podcast';
 
-const PodcastList = ({ location: { pathname }, podcasts, onClick }) => (
-  <div className="grid gallery">
+const PodcastList = ({ savedPodcastsIds = [], podcasts, onClick }) => (
+  (<div className="grid gallery">
     { podcasts &&
-      podcasts.map(podcast =>
-        (
+      podcasts.map((podcast) => {
+        const isSaved = savedPodcastsIds &&
+          savedPodcastsIds.some(id => id === podcast.collectionId);
+        return (
           <Podcast
             key={podcast.collectionId}
             {...podcast}
             podcast={podcast}
             onClick={() => onClick(podcast)}
-            location={pathname}
+            saved={isSaved}
           />
-        ))
+        );
+      })
     }
-  </div>
+  </div>)
 );
 
 PodcastList.propTypes = {
@@ -26,7 +29,11 @@ PodcastList.propTypes = {
     }).isRequired,
   ).isRequired,
   onClick: PropTypes.func.isRequired,
-  location: PropTypes.object.isRequired,
+  savedPodcastsIds: PropTypes.array,
+};
+
+PodcastList.defaultProps = {
+  savedPodcastsIds: [],
 };
 
 export default PodcastList;

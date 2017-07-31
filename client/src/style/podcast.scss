@@ -6,9 +6,10 @@
 .podcast {
   position: relative;
   min-height: $podcast-height;
+  border: 1px solid $grey;
   @include transition(opacity 150ms);
   &--saved {
-    border: 10px solid $green;
+    border: 10px solid $primary-color;
   }
 }
 

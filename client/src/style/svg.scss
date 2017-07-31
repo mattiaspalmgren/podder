@@ -4,8 +4,15 @@
   width: 1em;
   height: 1em;
   z-index: 10;
+  cursor: pointer;
+  padding: 10px; 
+
   &--large {
     width: 2em;
     height: 2em;
+  }
+  
+  &:hover {
+    fill: darken($primary-color, 20%);
   }
 }
