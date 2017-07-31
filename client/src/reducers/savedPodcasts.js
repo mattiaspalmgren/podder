@@ -1,9 +1,7 @@
-import {
-  ADD_PODCAST,
-  REMOVE_PODCAST,
-} from '../actions';
+import { ADD_PODCAST, REMOVE_PODCAST } from '../actions';
+import archive from './tmpArchive';
 
-const savedPodcasts = (state = [], action) => {
+const savedPodcasts = (state = archive, action) => {
   switch (action.type) {
     case ADD_PODCAST:
       return [...state, action.podcast];

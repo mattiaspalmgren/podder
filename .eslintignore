@@ -1,3 +1,2 @@
 app/**/*.js
 client/dist/*.js
-client/src/podcastsSrc.js

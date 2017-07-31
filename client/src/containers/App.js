@@ -17,6 +17,11 @@ class App extends Component {
     this.removeFromCollection = this.removeFromCollection.bind(this);
   }
 
+  componentDidMount() {
+    const { handleSearch } = this.props;
+    handleSearch('P3');
+  }
+
   handleSearch(searchTerm) {
     const { handleSearch } = this.props;
     handleSearch(searchTerm);
