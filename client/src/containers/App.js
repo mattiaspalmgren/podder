@@ -53,7 +53,8 @@ class App extends Component {
             <PodcastList
               podcasts={foundPodcasts}
               savedPodcastsIds={savedPodcastsIds}
-              onClick={this.addToCollection}
+              addToCollection={this.addToCollection}
+              removeFromCollection={this.removeFromCollection}
               {...this.props}
             />
           </div>
@@ -65,7 +66,8 @@ class App extends Component {
         render={() => (
           <PodcastList
             podcasts={savedPodcasts}
-            onClick={this.removeFromCollection}
+            addToCollection={this.addToCollection}
+            removeFromCollection={this.removeFromCollection}
             {...this.props}
           />)}
       />

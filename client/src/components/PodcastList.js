@@ -2,12 +2,19 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Podcast from './Podcast';
 
-const PodcastList = ({ savedPodcastsIds = [], podcasts, onClick }) => (
+const PodcastList = ({
+  location: { pathname },
+  savedPodcastsIds = [],
+  podcasts,
+  addToCollection,
+  removeFromCollection,
+}) => (
   (<div className="grid gallery">
     { podcasts &&
       podcasts.map((podcast) => {
         const isSaved = savedPodcastsIds &&
           savedPodcastsIds.some(id => id === podcast.collectionId);
+        const onClick = isSaved ? removeFromCollection : addToCollection;
         return (
           <Podcast
             key={podcast.collectionId}
@@ -15,6 +22,7 @@ const PodcastList = ({ savedPodcastsIds = [], podcasts, onClick }) => (
             podcast={podcast}
             onClick={() => onClick(podcast)}
             saved={isSaved}
+            location={pathname}
           />
         );
       })
@@ -23,13 +31,11 @@ const PodcastList = ({ savedPodcastsIds = [], podcasts, onClick }) => (
 );
 
 PodcastList.propTypes = {
-  podcasts: PropTypes.arrayOf(
-    PropTypes.shape({
-      collectionId: PropTypes.number.isRequired,
-    }).isRequired,
-  ).isRequired,
-  onClick: PropTypes.func.isRequired,
+  podcasts: PropTypes.array.isRequired,
+  addToCollection: PropTypes.func.isRequired,
+  removeFromCollection: PropTypes.func.isRequired,
   savedPodcastsIds: PropTypes.array,
+  location: PropTypes.object.isRequired,
 };
 
 PodcastList.defaultProps = {
