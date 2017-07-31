@@ -1,6 +1,4 @@
 .nav {
-  border-bottom: 1px solid gainsboro;
-  
   &__link {
     &--active {
       border-bottom: 2px solid $primary-color;
@@ -26,5 +24,9 @@
     padding: 0 10px 5px 10px;
     text-decoration: none;
     color: black;
+  }
+
+  &__container {
+    padding: 0;
   }
 }

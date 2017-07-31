@@ -1,21 +1,25 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
+const navigations = ['feed', 'explore', 'mine'];
 const Nav = () => (
-  <nav className="nav">
-    <ul>
-      <li>
-        <NavLink exact to={'/explore'} activeClassName={'nav__link--active'}>
-          EXPLORE
-        </NavLink>
-      </li>
-      <li>
-        <NavLink exact to={'/mine'} activeClassName={'nav__link--active'}>
-          MINE
-        </NavLink>
-      </li>
-    </ul>
-  </nav>
+  <div className="wrapper grid">
+    <div className="col col-12 nav__container">
+      <nav className="nav">
+        <ul>
+          {
+            navigations.map(n => (
+              <li key={n}>
+                <NavLink exact to={`/${n}`} activeClassName={'nav__link--active'}>
+                  {n.toUpperCase()}
+                </NavLink>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+    </div>
+  </div>
 );
 
 export default Nav;

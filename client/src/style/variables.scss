@@ -5,7 +5,8 @@ $large-gutter: 40px;
 
 /* COLORS */
 $primary-color: orange;
-$grey: Gainsboro;
+$grey: #dcdcdc;
+$light-grey: lighten($grey, 10%);
 
 /* LAYOUT */
 $border-radius: 3px;

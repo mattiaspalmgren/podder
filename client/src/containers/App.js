@@ -3,18 +3,19 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Route, Redirect } from 'react-router-dom';
 
-import { addPodcast, removePodcast, fetchPodcasts } from '../actions';
+import { addPodcast, removePodcast, fetchPodcasts, fetchEpisodes } from '../actions';
 import SearchBar from '../components/SearchBar';
 import Header from '../components/Header';
 import Nav from '../components/Nav';
 import PodcastList from '../components/PodcastList';
+import EpisodesList from '../components/EpisodesList';
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.handleSearch = this.handleSearch.bind(this);
-    this.addToCollection = this.addToCollection.bind(this);
-    this.removeFromCollection = this.removeFromCollection.bind(this);
+    this.savePodcast = this.savePodcast.bind(this);
+    this.removePodcast = this.removePodcast.bind(this);
   }
 
   componentDidMount() {
@@ -27,12 +28,12 @@ class App extends Component {
     handleSearch(searchTerm);
   }
 
-  addToCollection(podcast) {
+  savePodcast(podcast) {
     const { addToCollection } = this.props;
     addToCollection(podcast);
   }
 
-  removeFromCollection(podcast) {
+  removePodcast(podcast) {
     const { removeFromCollection } = this.props;
     removeFromCollection(podcast);
   }
@@ -40,37 +41,52 @@ class App extends Component {
   render() {
     const { foundPodcasts, savedPodcasts } = this.props;
     const savedPodcastsIds = savedPodcasts.map(p => p.collectionId);
-    return (<div className="wrapper">
-      <Header />
-      <Nav />
-      <Route path="/" render={() => (<Redirect to="/explore" push />)} />
-      <Route
-        exact
-        path="/explore"
-        render={() => (
-          <div>
-            <SearchBar handleSearch={this.handleSearch} />
-            <PodcastList
-              podcasts={foundPodcasts}
-              savedPodcastsIds={savedPodcastsIds}
-              addToCollection={this.addToCollection}
-              removeFromCollection={this.removeFromCollection}
+    const savedPodcastsUrls = savedPodcasts.map(p => p.feedUrl);
+    return (<div>
+      <div className="header">
+        <Header />
+        <Nav />
+      </div>
+      <div className="wrapper">
+        <Route path="/" render={() => (<Redirect to="/explore" push />)} />
+        <Route
+          exact
+          path="/feed"
+          render={() => (
+            <EpisodesList
+              savedPodcastsUrls={savedPodcastsUrls}
               {...this.props}
-            />
-          </div>
-        )}
-      />
-      <Route
-        exact
-        path="/mine"
-        render={() => (
-          <PodcastList
-            podcasts={savedPodcasts}
-            addToCollection={this.addToCollection}
-            removeFromCollection={this.removeFromCollection}
-            {...this.props}
-          />)}
-      />
+            />)}
+        />
+        <Route
+          exact
+          path="/explore"
+          render={() => (
+            <div>
+              <SearchBar handleSearch={this.handleSearch} />
+              <PodcastList
+                podcasts={foundPodcasts}
+                savedPodcastsIds={savedPodcastsIds}
+                savePodcast={this.savePodcast}
+                removePodcast={this.removePodcast}
+                {...this.props}
+              />
+            </div>
+          )}
+        />
+        <Route
+          exact
+          path="/mine"
+          render={() => (
+            <PodcastList
+              podcasts={savedPodcasts}
+              savedPodcastsIds={savedPodcastsIds}
+              savePodcast={this.savePodcast}
+              removePodcast={this.removePodcast}
+              {...this.props}
+            />)}
+        />
+      </div>
     </div>
     );
   }
@@ -98,6 +114,7 @@ const mapDispatchToProps = dispatch => (
     handleSearch: searchTerm => dispatch(fetchPodcasts(searchTerm)),
     addToCollection: podcast => dispatch(addPodcast(podcast)),
     removeFromCollection: podcast => dispatch(removePodcast(podcast.collectionId)),
+    getEpisodes: feedUrl => dispatch(fetchEpisodes(feedUrl)),
   }
 );
 

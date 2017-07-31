@@ -1,5 +1,6 @@
 body {
   font-family: "Noto Serif", serif;
+  margin: 0;
 }
 
 html {
@@ -32,4 +33,10 @@ img {
 .wrapper {
   margin: 0 auto;
   max-width: $max-width;
+}
+
+.header {
+  width: 100%; 
+  background-color: $light-grey;
+  border-bottom: 1px solid gainsboro;
 }
