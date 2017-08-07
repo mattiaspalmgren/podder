@@ -4,9 +4,9 @@ const path = require('path');
 const babelTransformSpread = require('babel-plugin-transform-object-rest-spread');
 
 const PATHS = {
-  src: path.join(__dirname, 'client/src'),
-  dist: path.join(__dirname, 'client/dist'),
-  style: path.join(__dirname, 'client/src'),
+  src: path.join(__dirname, 'src'),
+  dist: path.join(__dirname, 'dist'),
+  style: path.join(__dirname, 'src'),
 };
 
 const devServer = options => (
@@ -18,7 +18,7 @@ const devServer = options => (
       stats: 'errors-only',
       host: options.host,
       port: options.port,
-      contentBase: './client/dist',
+      contentBase: './dist',
     },
     plugins: [
       new webpack.HotModuleReplacementPlugin({

@@ -16,9 +16,7 @@
   "author": "Mattias Palmgren <mattiaspalmgren92@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "api": "babel-node server.js",
-    "start": "NODE_ENV=development webpack-dev-server",
-    "build": "NODE_ENV=build webpack --watch"
+    "start": "NODE_ENV=development webpack-dev-server"
   },
   "dependencies": {
     "babel-plugin-transform-object-rest-spread": "^6.23.0",
