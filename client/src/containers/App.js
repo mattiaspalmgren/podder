@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Route, Redirect } from 'react-router-dom';
 
-import { addPodcast, removePodcast, fetchPodcasts, fetchEpisodes } from '../actions';
+import { initialize, addPodcast, removePodcast, fetchPodcasts } from '../actions';
 import SearchBar from '../components/SearchBar';
 import Header from '../components/Header';
 import Nav from '../components/Nav';
@@ -19,8 +19,9 @@ class App extends Component {
   }
 
   componentDidMount() {
-    const { handleSearch } = this.props;
-    handleSearch('P3');
+    const { savedPodcasts, init } = this.props;
+    const feedUrl = savedPodcasts[0].feedUrl;
+    init('P3', feedUrl);
   }
 
   handleSearch(searchTerm) {
@@ -39,22 +40,21 @@ class App extends Component {
   }
 
   render() {
-    const { foundPodcasts, savedPodcasts } = this.props;
+    const { foundPodcasts, savedPodcasts, episodes } = this.props;
     const savedPodcastsIds = savedPodcasts.map(p => p.collectionId);
-    const savedPodcastsUrls = savedPodcasts.map(p => p.feedUrl);
     return (<div>
       <div className="header">
         <Header />
         <Nav />
       </div>
       <div className="wrapper">
-        <Route path="/" render={() => (<Redirect to="/explore" push />)} />
+        <Route exact path="/" render={() => (<Redirect to="/explore" push />)} />
         <Route
           exact
           path="/feed"
           render={() => (
             <EpisodesList
-              savedPodcastsUrls={savedPodcastsUrls}
+              episodes={episodes}
               {...this.props}
             />)}
         />
@@ -98,14 +98,21 @@ App.propTypes = {
   savedPodcasts: PropTypes.array.isRequired,
   addToCollection: PropTypes.func.isRequired,
   removeFromCollection: PropTypes.func.isRequired,
+  episodes: PropTypes.array.isRequired,
+  init: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => {
-  const { explorePodcasts: { foundPodcasts = [], isFetching = false }, savedPodcasts } = state;
+  const {
+    episodes: { episodes },
+    explorePodcasts: { foundPodcasts = [], isFetching = false },
+    savedPodcasts,
+  } = state;
   return {
     foundPodcasts,
     isFetching,
     savedPodcasts,
+    episodes,
   };
 };
 
@@ -114,7 +121,7 @@ const mapDispatchToProps = dispatch => (
     handleSearch: searchTerm => dispatch(fetchPodcasts(searchTerm)),
     addToCollection: podcast => dispatch(addPodcast(podcast)),
     removeFromCollection: podcast => dispatch(removePodcast(podcast.collectionId)),
-    getEpisodes: feedUrl => dispatch(fetchEpisodes(feedUrl)),
+    init: (searchTerm, feedUrl) => dispatch(initialize(searchTerm, feedUrl)),
   }
 );
 

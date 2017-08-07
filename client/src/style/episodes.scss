@@ -1,0 +1,42 @@
+.episode-list {
+  flex-direction: column;
+  align-items: center;
+  padding-top: $large-gutter;
+}
+
+.episode {
+  position: relative;
+  text-align: center;
+  padding-bottom:100%;
+  height:0;
+  border: 1px solid $grey;
+    
+  @include transition(opacity 150ms);
+  
+  &__image {
+    width: 100%;
+    height: 100%;
+    display:block;
+    position:absolute;
+    @extend .podcast__image;
+
+    &--loaded {
+      @extend .podcast__image--loaded;
+    }
+  }
+
+  &__producer {
+    padding: $small-gutter $medium-gutter;
+    border: 1px solid $grey;
+    border-bottom: none; 
+    border-radius: 3px;
+  }
+
+  &__description {
+    @extend .episode__producer;
+    border-bottom: 1px solid $grey;
+    border-top: none; 
+    background-color: $light-grey;
+    font-size: 0.9em;
+  }
+}
