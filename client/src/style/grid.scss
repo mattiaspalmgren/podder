@@ -28,7 +28,11 @@
 
 @media (min-width: $media-small) and (max-width: $media-medium) {
   .col-3 {
-    width: 33.33333%;
+    width: calc(100% / 3);
+  }
+
+  .col-6 {
+    width: calc(100% * 2 / 3); 
   }
 }
 

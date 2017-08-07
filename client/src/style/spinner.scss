@@ -7,7 +7,7 @@
   border: $spinner-border-width solid black;
   border-right-color: transparent;
   border-radius: 50%;
-  
+  top: calc(50% - #{$spinner-height});
   width: $spinner-widht;
   height: $spinner-height;
   @include animation(spin .75s linear infinite);
