@@ -13,5 +13,6 @@ module.exports = {
       "no-console": "off",
       "consistent-return": "off",
       "func-names": "off",
+      "jsx-a11y/label-has-for": "off"
     }
 };
