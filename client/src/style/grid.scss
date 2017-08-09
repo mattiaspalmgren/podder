@@ -4,6 +4,10 @@
   flex-wrap: wrap;
 }
 
+.grid--column {
+  flex-direction: column;
+}
+
 .grid.grid-middle   { align-items: center; }
 .grid.grid-center   { justify-content: center; }
 

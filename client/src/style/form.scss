@@ -1,0 +1,46 @@
+.form {
+  margin-top: $large-gutter;
+  padding: $large-gutter 0;
+  border: 1px solid $grey;
+  border-radius: 2px;
+  background-color: $light-grey;
+
+  &__field {
+    padding: $medium-gutter/2;
+    border-radius: 2px;
+    border: 1px solid $grey;
+    margin-bottom: $small-gutter; 
+    font-size: 0.9em;
+    &--invalid {
+      border: 1px solid $warning;
+    }
+  }
+
+  &__submit {
+    @extend .form__field;
+    background-color: $primary-color;
+    color: white;
+    &--disable {
+      background-color: $grey;
+      cursor: not-allowed;
+    }
+  }
+
+  &__error {
+    margin-top: $medium-gutter;
+    text-align: center;
+    color: $warning;
+    font-size: 0.9em;
+    font-family: system-ui;
+  }
+}
+
+.opposite-action {
+  margin-top: $medium-gutter;
+  background-color: $light-grey;
+  border: 1px solid $grey;
+  border-radius: 2px;
+  padding: $medium-gutter;
+  font-size: 0.9em;
+  text-align: center;
+}
