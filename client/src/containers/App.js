@@ -10,6 +10,7 @@ import Nav from '../components/Nav';
 import PodcastList from '../components/PodcastList';
 import EpisodesList from '../components/EpisodesList';
 import Register from '../containers/Register';
+import Login from '../containers/Login';
 
 class App extends Component {
   constructor(props) {
@@ -51,6 +52,7 @@ class App extends Component {
       <div className="wrapper">
         <Route exact path="/" render={() => (<Redirect to="/explore" push />)} />
         <Route exact path="/register" render={() => (<Register />)} />
+        <Route exact path="/login" render={() => (<Login />)} />
         <Route
           exact
           path="/feed"

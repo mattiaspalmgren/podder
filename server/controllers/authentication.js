@@ -1,6 +1,9 @@
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 const config = require('../config/main');
+const passport = require('passport');
+
+require('../config/passport');
 
 function generateToken(user) {
   return jwt.sign(user, config.secret, {
@@ -17,12 +20,17 @@ function setUserInfo(request) {
 
 // Login Route
 
-exports.login = (req, res) => {
-  const userInfo = setUserInfo(req.user);
-  res.status(200).json({
-    token: `JWT ${generateToken(userInfo)}`,
-    user: userInfo,
-  });
+exports.login = (req, res, next) => {
+  passport.authenticate('local', { session: false }, (err, user) => {
+    if (err) { return next(err); }
+    if (!user) { return res.status(401).send({ error: 'Wrong password or email' }); }
+
+    const userInfo = setUserInfo(user);
+    res.status(200).json({
+      token: `JWT ${generateToken(userInfo)}`,
+      user: userInfo,
+    });
+  })(req, res, next);
 };
 
 // Registration Route
