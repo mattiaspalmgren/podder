@@ -32,7 +32,7 @@ const PodcastList = ({
 
 PodcastList.propTypes = {
   podcasts: PropTypes.array.isRequired,
-  savePodcast: PropTypes.func.isRequired,
+  savePodcast: PropTypes.func,
   removePodcast: PropTypes.func.isRequired,
   savedPodcastsIds: PropTypes.array,
   location: PropTypes.object.isRequired,
