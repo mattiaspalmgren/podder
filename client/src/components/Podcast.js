@@ -24,9 +24,9 @@ class Podcast extends Component {
     let icon;
     const { saved } = this.props;
     if (saved) {
-      icon = <Svg color={'orange'} type={'cross'} />;
+      icon = <Svg color={'orange'} type={'cross'} size={'large'} />;
     } else {
-      icon = <Svg color={'orange'} type={'checkmark'} />;
+      icon = <Svg color={'orange'} type={'checkmark'} size={'large'} />;
     }
     return icon;
   }
