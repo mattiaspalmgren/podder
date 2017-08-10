@@ -10,6 +10,7 @@ import Explore from '../containers/Explore';
 import Feed from '../containers/Feed';
 import Mine from '../containers/Mine';
 import RequireAuthentication from '../containers/RequireAuthentication';
+import Header from '../components/Header';
 
 class App extends Component {
   componentDidMount() {
@@ -19,14 +20,18 @@ class App extends Component {
   }
 
   render() {
+    const { authenticated } = this.props;
     return (
-      <div className="wrapper">
-        <Route exact path="/" render={() => (<Redirect to="/explore" push />)} />
-        <Route exact path="/register" component={Register} />
-        <Route exact path="/login" component={Login} />
-        <Route exact path="/feed" component={RequireAuthentication(Feed)} />
-        <Route path="/explore" component={RequireAuthentication(Explore)} />
-        <Route exact path="/mine" component={RequireAuthentication(Mine)} />
+      <div>
+        { authenticated && <Header />}
+        <div className="wrapper">
+          <Route exact path="/" render={() => (<Redirect to="/explore" push />)} />
+          <Route exact path="/register" component={Register} />
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/feed" component={RequireAuthentication(Feed)} />
+          <Route path="/explore" component={RequireAuthentication(Explore)} />
+          <Route exact path="/mine" component={RequireAuthentication(Mine)} />
+        </div>
       </div>
     );
   }
@@ -35,11 +40,12 @@ class App extends Component {
 App.propTypes = {
   savedPodcasts: PropTypes.array.isRequired,
   init: PropTypes.func.isRequired,
+  authenticated: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state) => {
-  const { savedPodcasts } = state;
-  return { savedPodcasts };
+  const { savedPodcasts, auth: { authenticated } } = state;
+  return { savedPodcasts, authenticated };
 };
 
 const mapDispatchToProps = dispatch => (

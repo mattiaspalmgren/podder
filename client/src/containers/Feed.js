@@ -2,13 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import EpisodesList from '../components/EpisodesList';
-import Header from '../components/Header';
 
 const Feed = ({ episodes }) => (
-  <div>
-    <Header />
-    <EpisodesList episodes={episodes} />
-  </div>
+  <EpisodesList episodes={episodes} />
 );
 
 Feed.propTypes = {
