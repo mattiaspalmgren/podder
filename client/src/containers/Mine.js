@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { removePodcast } from '../actions';
 import PodcastList from '../components/PodcastList';
+import Header from '../components/Header';
 
 class Mine extends Component {
   constructor(props) {
@@ -19,12 +20,15 @@ class Mine extends Component {
     const { savedPodcasts } = this.props;
     const savedPodcastsIds = savedPodcasts.map(p => p.collectionId);
     return (
-      <PodcastList
-        podcasts={savedPodcasts}
-        savedPodcastsIds={savedPodcastsIds}
-        removePodcast={this.removePodcast}
-        {...this.props}
-      />
+      <div>
+        <Header />
+        <PodcastList
+          podcasts={savedPodcasts}
+          savedPodcastsIds={savedPodcastsIds}
+          removePodcast={this.removePodcast}
+          {...this.props}
+        />
+      </div>
     );
   }
 }

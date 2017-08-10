@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { fetchPodcasts, addPodcast, removePodcast } from '../actions';
 import SearchBar from '../components/SearchBar';
 import PodcastList from '../components/PodcastList';
+import Header from '../components/Header';
 
 class Explore extends Component {
   constructor(props) {
@@ -33,6 +34,7 @@ class Explore extends Component {
     const savedPodcastsIds = savedPodcasts.map(p => p.collectionId);
     return (
       <div>
+        <Header />
         <SearchBar handleSearch={this.handleSearch} />
         <PodcastList
           podcasts={foundPodcasts}

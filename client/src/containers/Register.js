@@ -68,6 +68,7 @@ class Register extends Component {
     return (
       <div className="grid grid-middle grid--column">
         <form className="form col col-6" onSubmit={handleSubmit(this.handleFormSubmit)}>
+          <h1>Podder</h1>
           <Field name="email" component={renderField} type="text" placeholder={'Email'} />
           <Field name="password" component={renderField} type="password" placeholder="Password" />
           <div className="grid grid-center">

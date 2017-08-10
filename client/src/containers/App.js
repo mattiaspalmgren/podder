@@ -4,13 +4,12 @@ import { connect } from 'react-redux';
 import { Route, Redirect } from 'react-router-dom';
 
 import { initialize } from '../actions';
-import Header from '../components/Header';
-import Nav from '../components/Nav';
 import Register from '../containers/Register';
 import Login from '../containers/Login';
 import Explore from '../containers/Explore';
 import Feed from '../containers/Feed';
 import Mine from '../containers/Mine';
+import RequireAuthentication from '../containers/RequireAuthentication';
 
 class App extends Component {
   componentDidMount() {
@@ -20,20 +19,15 @@ class App extends Component {
   }
 
   render() {
-    return (<div>
-      <div className="header">
-        <Header />
-        <Nav />
-      </div>
+    return (
       <div className="wrapper">
         <Route exact path="/" render={() => (<Redirect to="/explore" push />)} />
         <Route exact path="/register" component={Register} />
         <Route exact path="/login" component={Login} />
-        <Route exact path="/feed" component={Feed} />
-        <Route path="/explore" component={Explore} />
-        <Route exact path="/mine" component={Mine} />
+        <Route exact path="/feed" component={RequireAuthentication(Feed)} />
+        <Route path="/explore" component={RequireAuthentication(Explore)} />
+        <Route exact path="/mine" component={RequireAuthentication(Mine)} />
       </div>
-    </div>
     );
   }
 }
