@@ -1,6 +1,7 @@
 import history from '../plugins/history';
 
 export const AUTH_USER = 'AUTH_USER';
+export const UNAUTH_USER = 'UNAUTH_USER';
 export const AUTH_ERROR = 'AUTH_ERROR';
 
 const API_URL = 'http://localhost:3000/api';
@@ -46,5 +47,11 @@ export function loginUser({ email, password }) {
         history.push('/feed');
       }
     });
+  };
+}
+
+export function logoutUser() {
+  return function (dispatch) {
+    dispatch({ type: UNAUTH_USER });
   };
 }

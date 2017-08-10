@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { Route, Redirect } from 'react-router-dom';
 
 import { initialize } from '../actions';
+import { logoutUser } from '../actions/authenticationActions';
 import Register from '../containers/Register';
 import Login from '../containers/Login';
 import Explore from '../containers/Explore';
@@ -20,10 +21,10 @@ class App extends Component {
   }
 
   render() {
-    const { authenticated } = this.props;
+    const { authenticated, logout } = this.props;
     return (
       <div>
-        { authenticated && <Header />}
+        { authenticated && <Header handleLogout={logout} />}
         <div className="wrapper">
           <Route exact path="/" render={() => (<Redirect to="/explore" push />)} />
           <Route exact path="/register" component={Register} />
@@ -41,6 +42,7 @@ App.propTypes = {
   savedPodcasts: PropTypes.array.isRequired,
   init: PropTypes.func.isRequired,
   authenticated: PropTypes.bool.isRequired,
+  logout: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => {
@@ -51,6 +53,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = dispatch => (
   {
     init: (searchTerm, feedUrl) => dispatch(initialize(searchTerm, feedUrl)),
+    logout: () => dispatch(logoutUser()),
   }
 );
 
