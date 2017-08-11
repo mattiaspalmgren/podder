@@ -14,6 +14,14 @@ class Podcast extends Component {
     this.toggleHoverState = this.toggleHoverState.bind(this);
   }
 
+  shouldComponentUpdate(nextProps, nextState) {
+    const isNotLoaded = !this.state.loaded && nextState.loaded;
+    const savedToggled = this.props.saved !== nextProps.saved;
+    const hoverChanged = this.state.hover !== nextState.hover;
+    if (isNotLoaded || savedToggled || hoverChanged) { return true; }
+    return false;
+  }
+
   toggleHoverState(e) {
     const type = e.type;
     const isHovering = type === 'mouseenter';

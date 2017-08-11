@@ -15,9 +15,8 @@ import Header from '../components/Header';
 
 class App extends Component {
   componentDidMount() {
-    const { savedPodcasts, init } = this.props;
-    const feedUrl = savedPodcasts[0].feedUrl;
-    init('P3', feedUrl);
+    const { init } = this.props;
+    init('P3', 'http://api.sr.se/api/rss/pod/3966');
   }
 
   render() {
@@ -39,15 +38,14 @@ class App extends Component {
 }
 
 App.propTypes = {
-  savedPodcasts: PropTypes.array.isRequired,
   init: PropTypes.func.isRequired,
   authenticated: PropTypes.bool.isRequired,
   logout: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => {
-  const { savedPodcasts, auth: { authenticated } } = state;
-  return { savedPodcasts, authenticated };
+  const { auth: { authenticated } } = state;
+  return { authenticated };
 };
 
 const mapDispatchToProps = dispatch => (
