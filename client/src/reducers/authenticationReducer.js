@@ -1,6 +1,7 @@
 import { UNAUTH_USER, AUTH_USER, AUTH_ERROR } from '../actions/authenticationActions';
 
-const INITIAL_STATE = { error: '', message: '', content: '', authenticated: false };
+const INITIAL_AUTH = !!sessionStorage.jwt;
+const INITIAL_STATE = { error: '', message: '', content: '', authenticated: INITIAL_AUTH };
 
 export default function (state = INITIAL_STATE, action) {
   switch (action.type) {

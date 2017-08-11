@@ -6,6 +6,11 @@ export const AUTH_ERROR = 'AUTH_ERROR';
 
 const API_URL = 'http://localhost:3000/api';
 
+function login(token) {
+  sessionStorage.setItem('jwt', token);
+  history.push('/feed');
+}
+
 export function registerUser({ email, password }) {
   return function (dispatch) {
     fetch(`${API_URL}/register`, {
@@ -22,7 +27,7 @@ export function registerUser({ email, password }) {
         dispatch({ type: AUTH_ERROR, payload: res.error });
       } else {
         dispatch({ type: AUTH_USER });
-        history.push('/feed');
+        login(res.token);
       }
     });
   };
@@ -44,7 +49,7 @@ export function loginUser({ email, password }) {
         dispatch({ type: AUTH_ERROR, payload: res.error });
       } else {
         dispatch({ type: AUTH_USER });
-        history.push('/feed');
+        login(res.token);
       }
     });
   };
