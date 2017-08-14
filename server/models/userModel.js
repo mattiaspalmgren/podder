@@ -14,6 +14,7 @@ const UserSchema = new Schema({
     type: String,
     required: true,
   },
+  subscribedIds: [Number],
   resetPasswordToken: { type: String },
   resetPasswordExpires: { type: Date },
 }, { timestamps: true });

@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const User = require('../models/user');
+const User = require('../models/userModel');
 const config = require('../config/main');
 const passport = require('passport');
 
@@ -65,9 +65,17 @@ exports.register = (req, res, next) => {
 
 // JWT Auth Route
 
-exports.jwtAuth = (req, res) => {
-  const userInfo = setUserInfo(req.user);
-  res.status(200).json({
-    user: userInfo,
-  });
+exports.requireAuth = (req, res, next) => {
+  const token = req.get('authorization');
+  if (token) {
+    jwt.verify(token, config.secret, (err, decoded) => {
+      if (err) {
+        return res.json({ success: false, message: 'Failed to authenticate token.' });
+      } else { //eslint-disable-line
+        req.decoded = decoded;
+        next();
+      }
+    });
+  } else { return res.status(403).send({ success: false, message: 'No token provided.' }); }
 };
+
