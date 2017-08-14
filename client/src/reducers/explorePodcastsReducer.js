@@ -1,7 +1,4 @@
-import {
-  REQUEST_PODCASTS,
-  RECEIVE_PODCASTS,
-} from '../actions';
+import { REQUEST_PODCASTS, RECEIVE_PODCASTS } from '../actions/podcastActions';
 
 export default function explorePodcasts(state = {
   isFetching: false,

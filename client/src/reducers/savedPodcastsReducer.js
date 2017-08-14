@@ -1,4 +1,4 @@
-import { ADD_PODCAST, REMOVE_PODCAST } from '../actions';
+import { ADD_PODCAST, REMOVE_PODCAST } from '../actions/podcastActions';
 import archive from './tmpArchive';
 
 const savedPodcasts = (state = archive, action) => {

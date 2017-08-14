@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { removePodcast } from '../actions';
+import { removePodcast } from '../actions/podcastActions';
 import PodcastList from '../components/PodcastList';
 
 class Mine extends Component {

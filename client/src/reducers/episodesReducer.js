@@ -1,7 +1,4 @@
-import {
-  REQUEST_EPISODES,
-  RECEIVE_EPISODES,
-} from '../actions';
+import { REQUEST_EPISODES, RECEIVE_EPISODES } from '../actions/episodesActions';
 
 export default function episodes(state = {
   isFetching: false,

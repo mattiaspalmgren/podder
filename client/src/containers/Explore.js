@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { fetchPodcasts, addPodcast, removePodcast } from '../actions';
+import { fetchPodcasts, addPodcast, removePodcast } from '../actions/podcastActions';
 import SearchBar from '../components/SearchBar';
 import PodcastList from '../components/PodcastList';
 
