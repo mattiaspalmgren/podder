@@ -8,7 +8,11 @@ const SessionHandler = {
     history.push('/feed');
   },
   removeJwt: () => sessionStorage.removeItem(jwtId),
-  getJwt: () => sessionStorage.getItem(jwtId).replace('JWT ', ''),
+  getJwt: () => {
+    if (sessionStorage.getItem(jwtId)) {
+      return sessionStorage.getItem(jwtId).replace('JWT ', '');
+    }
+  },
 };
 
 export default SessionHandler;
