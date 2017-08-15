@@ -6,7 +6,8 @@ const passport = require('passport');
 require('../config/passport');
 
 function generateToken(user) {
-  return jwt.sign(user, config.secret, {
+  const { _id, email } = user;
+  return jwt.sign({ _id, email }, config.secret, {
     expiresIn: 10080,
   });
 }
@@ -15,6 +16,7 @@ function setUserInfo(request) {
   return {
     _id: request._id,
     email: request.email,
+    subscribedIds: request.subscribedIds,
   };
 }
 

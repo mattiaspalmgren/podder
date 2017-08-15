@@ -11,6 +11,10 @@ function login(token) {
   history.push('/feed');
 }
 
+function logout() {
+  sessionStorage.removeItem('jwt');
+}
+
 export function registerUser({ email, password }) {
   return function (dispatch) {
     fetch(`${API_URL}/register`, {
@@ -26,7 +30,7 @@ export function registerUser({ email, password }) {
       if (res.error) {
         dispatch({ type: AUTH_ERROR, payload: res.error });
       } else {
-        dispatch({ type: AUTH_USER });
+        dispatch({ type: AUTH_USER, payload: res });
         login(res.token);
       }
     });
@@ -48,7 +52,7 @@ export function loginUser({ email, password }) {
       if (res.error) {
         dispatch({ type: AUTH_ERROR, payload: res.error });
       } else {
-        dispatch({ type: AUTH_USER });
+        dispatch({ type: AUTH_USER, payload: res });
         login(res.token);
       }
     });
@@ -58,5 +62,6 @@ export function loginUser({ email, password }) {
 export function logoutUser() {
   return function (dispatch) {
     dispatch({ type: UNAUTH_USER });
+    logout();
   };
 }
