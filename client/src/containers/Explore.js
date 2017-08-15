@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { fetchPodcasts, addPodcast, removePodcast } from '../actions/podcastActions';
+import { fetchPodcasts } from '../actions/podcastActions';
 import { updateUser } from '../actions/userActions';
 import SearchBar from '../components/SearchBar';
 import PodcastList from '../components/PodcastList';
@@ -10,8 +10,6 @@ class Explore extends Component {
   constructor(props) {
     super(props);
     this.handleSearch = this.handleSearch.bind(this);
-    this.savePodcast = this.savePodcast.bind(this);
-    this.removePodcast = this.removePodcast.bind(this);
   }
 
   handleSearch(searchTerm) {
@@ -19,18 +17,8 @@ class Explore extends Component {
     handleSearch(searchTerm);
   }
 
-  savePodcast(podcast) {
-    const { addToCollection } = this.props;
-    addToCollection(podcast);
-  }
-
-  removePodcast(podcast) {
-    const { removeFromCollection } = this.props;
-    removeFromCollection(podcast);
-  }
-
   render() {
-    const { foundPodcasts, savedPodcasts } = this.props;
+    const { foundPodcasts, savedPodcasts, togglePodcastOnUser } = this.props;
     const savedPodcastsIds = savedPodcasts.map(p => p.collectionId);
     return (
       <div>
@@ -38,8 +26,7 @@ class Explore extends Component {
         <PodcastList
           podcasts={foundPodcasts}
           savedPodcastsIds={savedPodcastsIds}
-          savePodcast={this.savePodcast}
-          removePodcast={this.removePodcast}
+          togglePodcastOnUser={togglePodcastOnUser}
           {...this.props}
         />
       </div>
@@ -51,8 +38,7 @@ Explore.propTypes = {
   foundPodcasts: PropTypes.array.isRequired,
   savedPodcasts: PropTypes.array.isRequired,
   handleSearch: PropTypes.func.isRequired,
-  removeFromCollection: PropTypes.func.isRequired,
-  addToCollection: PropTypes.func.isRequired,
+  togglePodcastOnUser: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => {
@@ -66,8 +52,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = dispatch => (
   {
     handleSearch: searchTerm => dispatch(fetchPodcasts(searchTerm)),
-    addToCollection: podcast => dispatch(updateUser(podcast.collectionId)),
-    removeFromCollection: podcast => dispatch(removePodcast(podcast.collectionId)),
+    togglePodcastOnUser: podcast => dispatch(updateUser({ subscribedIds: podcast.collectionId })),
   }
 );
 

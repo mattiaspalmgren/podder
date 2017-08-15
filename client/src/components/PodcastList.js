@@ -6,21 +6,19 @@ const PodcastList = ({
   location: { pathname },
   savedPodcastsIds = [],
   podcasts,
-  savePodcast,
-  removePodcast,
+  togglePodcastOnUser,
 }) => (
   (<div className="grid podcast-list">
     { podcasts &&
       podcasts.map((podcast) => {
         const isSaved = savedPodcastsIds &&
           savedPodcastsIds.some(id => id === podcast.collectionId);
-        const onClick = isSaved ? removePodcast : savePodcast;
         return (
           <Podcast
             key={podcast.collectionId}
             {...podcast}
             podcast={podcast}
-            onClick={() => onClick(podcast)}
+            onClick={() => togglePodcastOnUser(podcast)}
             saved={isSaved}
             location={pathname}
           />
@@ -32,8 +30,7 @@ const PodcastList = ({
 
 PodcastList.propTypes = {
   podcasts: PropTypes.array.isRequired,
-  savePodcast: PropTypes.func,
-  removePodcast: PropTypes.func.isRequired,
+  togglePodcastOnUser: PropTypes.func.isRequired,
   savedPodcastsIds: PropTypes.array,
   location: PropTypes.object.isRequired,
 };
