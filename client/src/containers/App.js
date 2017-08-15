@@ -5,7 +5,7 @@ import { Route, Redirect } from 'react-router-dom';
 
 import { fetchPodcasts } from '../actions/podcastActions';
 import { fetchEpisodes } from '../actions/episodesActions';
-import { logoutUser } from '../actions/authenticationActions';
+import { logoutUser } from '../actions/userActions';
 import Register from '../containers/Register';
 import Login from '../containers/Login';
 import Explore from '../containers/Explore';
@@ -47,7 +47,7 @@ App.propTypes = {
 };
 
 const mapStateToProps = (state) => {
-  const { auth: { authenticated } } = state;
+  const { user: { authenticated } } = state;
   return { authenticated };
 };
 

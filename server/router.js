@@ -4,6 +4,8 @@ const AuthenticationController = require('./controllers/authenticationController
 const PodcastController = require('./controllers/podcastController');
 const UserController = require('./controllers/userController');
 
+const requireAuth = AuthenticationController.requireAuth;
+
 module.exports = (app) => {
   const apiRoutes = express.Router();
 
@@ -13,18 +15,15 @@ module.exports = (app) => {
   authRoutes.post('/login', AuthenticationController.login);
   apiRoutes.use('/', authRoutes);
 
-  // Middleware to require auth on following routes
-  apiRoutes.use(AuthenticationController.requireAuth);
-
   // Pod Routes
   const podRoutes = express.Router();
-  podRoutes.post('/podcast', PodcastController.add);
-  podRoutes.get('/podcast', PodcastController.get);
+  podRoutes.post('/podcast', requireAuth, PodcastController.add);
+  podRoutes.get('/podcast', requireAuth, PodcastController.get);
   apiRoutes.use('/', podRoutes);
 
   // User Routes
   const userRoutes = express.Router();
-  userRoutes.put('/user', UserController.update);
+  userRoutes.put('/user', requireAuth, UserController.update);
   apiRoutes.use('/', userRoutes);
 
   app.use('/api', apiRoutes);

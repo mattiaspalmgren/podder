@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import { NavLink } from 'react-router-dom';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
-import { loginUser } from '../actions/authenticationActions';
+import { loginUser } from '../actions/userActions';
 
 function validate(formProps) {
   const errors = {};
@@ -101,8 +101,8 @@ Login.propTypes = {
 
 const mapStateToProps = state => (
   {
-    errorMessage: state.auth.error,
-    message: state.auth.message,
+    errorMessage: state.user.error,
+    message: state.user.message,
   }
 );
 

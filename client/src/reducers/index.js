@@ -3,13 +3,13 @@ import { reducer as formReducer } from 'redux-form';
 import savedPodcasts from './savedPodcastsReducer';
 import explorePodcasts from './explorePodcastsReducer';
 import episodes from './episodesReducer';
-import auth from './authenticationReducer';
+import user from './userReducer';
 
 const podder = combineReducers({
   savedPodcasts,
   explorePodcasts,
   episodes,
-  auth,
+  user,
   form: formReducer,
 });
 

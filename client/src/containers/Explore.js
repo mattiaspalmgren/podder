@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { fetchPodcasts, addPodcast, removePodcast } from '../actions/podcastActions';
+import { updateUser } from '../actions/userActions';
 import SearchBar from '../components/SearchBar';
 import PodcastList from '../components/PodcastList';
 
@@ -65,7 +66,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = dispatch => (
   {
     handleSearch: searchTerm => dispatch(fetchPodcasts(searchTerm)),
-    addToCollection: podcast => dispatch(addPodcast(podcast)),
+    addToCollection: podcast => dispatch(updateUser(podcast.collectionId)),
     removeFromCollection: podcast => dispatch(removePodcast(podcast.collectionId)),
   }
 );
