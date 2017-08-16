@@ -15,8 +15,9 @@ import Header from '../components/Header';
 
 class App extends Component {
   componentDidMount() {
-    const { initPodcasts } = this.props;
+    const { initPodcasts, initUser } = this.props;
     initPodcasts('P3');
+    initUser();
   }
 
   render() {
@@ -39,6 +40,7 @@ class App extends Component {
 
 App.propTypes = {
   initPodcasts: PropTypes.func.isRequired,
+  initUser: PropTypes.func.isRequired,
   authenticated: PropTypes.bool.isRequired,
   logout: PropTypes.func.isRequired,
 };
@@ -51,6 +53,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = dispatch => (
   {
     initPodcasts: searchTerm => dispatch(fetchPodcasts(searchTerm)),
+    initUser: () => dispatch(getUser()),
     logout: () => dispatch(logoutUser()),
   }
 );
