@@ -13,4 +13,11 @@ const podder = combineReducers({
   form,
 });
 
-export default podder;
+const rootReducer = (state, action) => {
+  if (action.type === 'UNAUTH_USER') {
+    // Reset all reducers
+    state = undefined; //eslint-disable-line
+  }
+  return podder(state, action);
+};
+export default rootReducer;

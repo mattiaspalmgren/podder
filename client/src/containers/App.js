@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { Route, Redirect } from 'react-router-dom';
 
 import { fetchPodcasts } from '../actions/podcastActions';
-import { fetchEpisodes } from '../actions/episodesActions';
 import { getUser, logoutUser } from '../actions/userActions';
 import Register from '../containers/Register';
 import Login from '../containers/Login';
@@ -16,10 +15,8 @@ import Header from '../components/Header';
 
 class App extends Component {
   componentDidMount() {
-    const { initPodcasts, initEpisodes, initUser, authenticated } = this.props;
+    const { initPodcasts } = this.props;
     initPodcasts('P3');
-    // initEpisodes('http://api.sr.se/api/rss/pod/3966');
-    if (authenticated) { initUser(); }
   }
 
   render() {
@@ -42,8 +39,6 @@ class App extends Component {
 
 App.propTypes = {
   initPodcasts: PropTypes.func.isRequired,
-  initEpisodes: PropTypes.func.isRequired,
-  initUser: PropTypes.func.isRequired,
   authenticated: PropTypes.bool.isRequired,
   logout: PropTypes.func.isRequired,
 };
@@ -56,8 +51,6 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = dispatch => (
   {
     initPodcasts: searchTerm => dispatch(fetchPodcasts(searchTerm)),
-    initEpisodes: feedUrl => dispatch(fetchEpisodes(feedUrl)),
-    initUser: () => dispatch(getUser()),
     logout: () => dispatch(logoutUser()),
   }
 );

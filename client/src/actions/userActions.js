@@ -61,6 +61,7 @@ export function loginUser({ email, password }) {
           dispatch({ type: AUTH_ERROR, payload: res.error });
         } else {
           dispatch({ type: AUTH_USER, payload: res.user });
+          dispatch(getUser());
           SessionHandler.saveJwt(res.token);
         }
       });
