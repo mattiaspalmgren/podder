@@ -1,37 +1,29 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { removePodcast } from '../actions/podcastActions';
 import PodcastList from '../components/PodcastList';
 
-class Mine extends Component {
-  constructor(props) {
-    super(props);
-    this.removePodcast = this.removePodcast.bind(this);
-  }
-
-  removePodcast(podcast) {
-    const { removeFromCollection } = this.props;
-    removeFromCollection(podcast);
-  }
-
-  render() {
-    const { savedPodcasts } = this.props;
-    const savedPodcastsIds = savedPodcasts.map(p => p.collectionId);
-    return (
-      <PodcastList
-        podcasts={savedPodcasts}
-        savedPodcastsIds={savedPodcastsIds}
-        removePodcast={this.removePodcast}
-        {...this.props}
-      />
-    );
-  }
-}
+const Mine = ({
+  location: { pathname },
+  savedPodcasts,
+  togglePodcastOnUser,
+}) => {
+  const savedPodcastsIds = savedPodcasts.map(p => p.collectionId);
+  return (
+    <PodcastList
+      podcasts={savedPodcasts}
+      savedPodcastsIds={savedPodcastsIds}
+      togglePodcastOnUser={togglePodcastOnUser}
+      location={{ pathname }}
+    />
+  );
+};
 
 Mine.propTypes = {
   savedPodcasts: PropTypes.array.isRequired,
-  removeFromCollection: PropTypes.func.isRequired,
+  togglePodcastOnUser: PropTypes.func.isRequired,
+  location: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => {
@@ -41,7 +33,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = dispatch => (
   {
-    removeFromCollection: podcast => dispatch(removePodcast(podcast.collectionId)),
+    togglePodcastOnUser: podcast => dispatch(removePodcast(podcast.collectionId)),
   }
 );
 

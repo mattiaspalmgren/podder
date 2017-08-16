@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { reducer as formReducer } from 'redux-form';
+import { reducer as form } from 'redux-form';
 import savedPodcasts from './savedPodcastsReducer';
 import explorePodcasts from './explorePodcastsReducer';
 import episodes from './episodesReducer';
@@ -10,7 +10,7 @@ const podder = combineReducers({
   explorePodcasts,
   episodes,
   user,
-  form: formReducer,
+  form,
 });
 
 export default podder;
