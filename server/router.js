@@ -18,6 +18,7 @@ module.exports = (app) => {
   // Pod Routes
   const podRoutes = express.Router();
   podRoutes.get('/podcasts', requireAuth, PodcastController.get);
+  podRoutes.post('/podcasts/episodes', requireAuth, PodcastController.getFeed);
   apiRoutes.use('/', podRoutes);
 
   // User Routes

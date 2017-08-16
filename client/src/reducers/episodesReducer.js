@@ -5,15 +5,10 @@ export default function episodes(state = {
   episodes: [],
 }, action) {
   switch (action.type) {
-    case REQUEST_EPISODES:
-      return Object.assign({}, state, {
-        isFetching: true,
-      });
     case RECEIVE_EPISODES:
-      return Object.assign({}, state, {
-        isFetching: false,
-        episodes: action.episodes,
-      });
+      return { episodes: action.episodes, isFetching: false };
+    case REQUEST_EPISODES:
+      return { ...state, isFetching: true };
     default:
       return state;
   }

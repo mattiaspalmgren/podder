@@ -23,6 +23,10 @@ class Episode extends Component {
           'episode__image--loaded': this.state.loaded,
         });
 
+    const imageUrl = episode['itunes:image'] ?
+      episode['itunes:image'][0].$.href :
+      'http://static.libsyn.com/p/assets/4/5/2/2/45229106b173434f/p3-man-up-hour.jpg';
+
     return (
       <div className="col col-6">
         <div className="episode__producer">
@@ -33,7 +37,7 @@ class Episode extends Component {
           <img
             className={episodeImageClasses}
             alt={episode['itunes:author']}
-            src={episode['itunes:image'][0].$.href}
+            src={imageUrl}
             onLoad={() => this.setState({ loaded: true })}
           />
         </div>
@@ -49,4 +53,3 @@ Episode.propTypes = {
 };
 
 export default Episode;
-// grid grid-center grid-middle

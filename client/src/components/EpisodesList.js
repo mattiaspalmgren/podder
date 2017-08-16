@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import Episode from './Episode';
 
 const EpisodesList = ({ episodes }) => (
-  (<div className="grid gallery episode-list">
+  (<div className="grid episode-list">
     {
       episodes.map(episode => (
         <Episode
-          key={episode['itunes:summary']}
+          key={episode.link[0]}
           episode={episode}
         />
       ))

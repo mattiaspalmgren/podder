@@ -23,8 +23,6 @@
     "babel-preset-stage-2": "^6.24.1",
     "body-parser": "^1.17.1",
     "classnames": "^2.2.5",
-    "fetch-jsonp": "^1.1.1",
-    "isomorphic-fetch": "^2.2.1",
     "node-sass": "^4.5.3",
     "prop-types": "^15.5.10",
     "react": "^15.6.1",
@@ -36,8 +34,7 @@
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.2.0",
     "sass-loader": "^6.0.5",
-    "svg-sprite-loader": "^3.0.5",
-    "xml2js": "^0.4.17"
+    "svg-sprite-loader": "^3.0.5"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",

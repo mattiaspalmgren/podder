@@ -1,5 +1,5 @@
-import fetch from 'isomorphic-fetch';
 import PodderApi from '../plugins/podderApi';
+import { getFeed } from './episodesActions';
 
 export const UPDATE_PODCASTS = 'UPDATE_PODCASTS';
 export const GET_PODCASTS = 'GET_PODCASTS';
@@ -12,6 +12,8 @@ export function getUserPodcasts() {
     PodderApi.getPodcasts()
       .then((res) => {
         dispatch({ type: GET_PODCASTS, payload: res.podcasts });
+        const feedUrls = res.podcasts.map(p => p.feedUrl);
+        dispatch(getFeed(feedUrls));
       });
   };
 }
