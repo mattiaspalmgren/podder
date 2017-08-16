@@ -6,7 +6,7 @@ import EpisodesList from '../components/EpisodesList';
 const Feed = ({ episodes, isFetching }) => (
   <div>
     { isFetching &&
-      <div className="episode">
+      <div className="spinner__container">
         <i className="spinner" />
       </div>
     }
