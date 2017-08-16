@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { removePodcast } from '../actions/podcastActions';
+import { updateUser } from '../actions/userActions';
 import PodcastList from '../components/PodcastList';
 
 const Mine = ({
@@ -33,7 +33,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = dispatch => (
   {
-    togglePodcastOnUser: podcast => dispatch(removePodcast(podcast.collectionId)),
+    togglePodcastOnUser: podcast => dispatch(updateUser(podcast)),
   }
 );
 

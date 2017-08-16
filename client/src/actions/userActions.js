@@ -1,5 +1,6 @@
 import SessionHandler from '../plugins/sessionHandler';
 import PodderApi from '../plugins/podderApi';
+import { updatePodcasts, getUserPodcasts } from './podcastActions';
 
 export const AUTH_USER = 'AUTH_USER';
 export const UNAUTH_USER = 'UNAUTH_USER';
@@ -17,12 +18,14 @@ export function getUser() {
           dispatch({ type: GET_USER_ERROR, payload: res.error });
         } else {
           dispatch({ type: GET_USER, payload: res.user });
+          dispatch(getUserPodcasts());
         }
       });
   };
 }
 
-export function updateUser(updateHash) {
+export function updateUser(podcast) {
+  const updateHash = { subscribedIds: podcast.collectionId };
   return function (dispatch) {
     PodderApi.updateUser(updateHash)
       .then((res) => {
@@ -30,6 +33,7 @@ export function updateUser(updateHash) {
           dispatch({ type: UPDATE_USER_ERROR, payload: res.error });
         } else {
           dispatch({ type: UPDATE_USER, payload: res.user });
+          dispatch(updatePodcasts(podcast));
         }
       });
   };

@@ -4,6 +4,7 @@ const API_URL = 'http://localhost:3000/api';
 const USER_URL = `${API_URL}/user`;
 const REGISTER_URL = `${API_URL}/register`;
 const LOGIN_URL = `${API_URL}/login`;
+const PODCASTS_URL = `${API_URL}/podcasts`;
 
 /* eslint-disable */
 
@@ -46,6 +47,12 @@ const PodderApi = {
       method: 'POST',
       headers: NON_AUTH_HEADER,
       body: JSON.stringify({ email, password }),
+    }).then(res => res.json())
+  ),
+  getPodcasts: () => (
+    fetch(PODCASTS_URL, {
+      method: 'GET',
+      headers: AUTH_HEADER,
     }).then(res => res.json())
   ),
 };

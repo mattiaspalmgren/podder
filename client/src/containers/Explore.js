@@ -52,7 +52,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = dispatch => (
   {
     handleSearch: searchTerm => dispatch(fetchPodcasts(searchTerm)),
-    togglePodcastOnUser: podcast => dispatch(updateUser({ subscribedIds: podcast.collectionId })),
+    togglePodcastOnUser: podcast => dispatch(updateUser(podcast)),
   }
 );
 

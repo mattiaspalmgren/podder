@@ -1,22 +1,27 @@
 import fetch from 'isomorphic-fetch';
+import PodderApi from '../plugins/podderApi';
 
-export const ADD_PODCAST = 'ADD_PODCAST';
-export const REMOVE_PODCAST = 'REMOVE_PODCAST';
+export const UPDATE_PODCASTS = 'UPDATE_PODCASTS';
+export const GET_PODCASTS = 'GET_PODCASTS';
 export const SEARCH_TERM = 'SEARCH_TERM';
 export const REQUEST_PODCASTS = 'REQUEST_PODCASTS';
 export const RECEIVE_PODCASTS = 'RECEIVE_PODCASTS';
 
-export const addPodcast = podcast => (
-  {
-    type: ADD_PODCAST,
-    podcast,
-  });
+export function getUserPodcasts() {
+  return function (dispatch) {
+    PodderApi.getPodcasts()
+      .then((res) => {
+        dispatch({ type: GET_PODCASTS, payload: res.podcasts });
+      });
+  };
+}
 
-export const removePodcast = podcastId => (
-  {
-    type: REMOVE_PODCAST,
-    podcastId,
-  });
+export function updatePodcasts(podcast) {
+  return {
+    type: UPDATE_PODCASTS,
+    podcast,
+  };
+}
 
 export function requestPodcasts(searchTerm) {
   return {

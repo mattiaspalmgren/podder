@@ -16,10 +16,10 @@ import Header from '../components/Header';
 
 class App extends Component {
   componentDidMount() {
-    const { initPodcasts, initEpisodes, initUser } = this.props;
+    const { initPodcasts, initEpisodes, initUser, authenticated } = this.props;
     initPodcasts('P3');
-    initEpisodes('http://api.sr.se/api/rss/pod/3966');
-    initUser();
+    // initEpisodes('http://api.sr.se/api/rss/pod/3966');
+    if (authenticated) { initUser(); }
   }
 
   render() {
