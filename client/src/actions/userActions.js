@@ -12,7 +12,6 @@ export const GET_USER_ERROR = 'GET_USER_ERROR';
 export function getUser() {
   return function (dispatch) {
     PodderApi.getUser()
-      .then(res => res.json())
       .then((res) => {
         if (res.error) {
           dispatch({ type: GET_USER_ERROR, payload: res.error });
@@ -26,7 +25,6 @@ export function getUser() {
 export function updateUser(updateHash) {
   return function (dispatch) {
     PodderApi.updateUser(updateHash)
-      .then(res => res.json())
       .then((res) => {
         if (res.error) {
           dispatch({ type: UPDATE_USER_ERROR, payload: res.error });
@@ -40,7 +38,6 @@ export function updateUser(updateHash) {
 export function registerUser({ email, password }) {
   return function (dispatch) {
     PodderApi.register(email, password)
-      .then(res => res.json())
       .then((res) => {
         if (res.error) {
           dispatch({ type: AUTH_ERROR, payload: res.error });
@@ -55,7 +52,6 @@ export function registerUser({ email, password }) {
 export function loginUser({ email, password }) {
   return function (dispatch) {
     PodderApi.login(email, password)
-      .then(res => res.json())
       .then((res) => {
         if (res.error) {
           dispatch({ type: AUTH_ERROR, payload: res.error });

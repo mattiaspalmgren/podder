@@ -25,28 +25,28 @@ const PodderApi = {
     fetch(USER_URL, {
       method: 'GET',
       headers: AUTH_HEADER,
-    })
+    }).then(res => res.json())
   ),
   updateUser: updateHash => (
     fetch(USER_URL, {
       method: 'PUT',
       headers: AUTH_HEADER,
       body: JSON.stringify({ data: updateHash }),
-    })
+    }).then(res => res.json())
   ),
   register: (email, password) => (
     fetch(REGISTER_URL, {
       method: 'POST',
       headers: NON_AUTH_HEADER,
       body: JSON.stringify({ email, password }),
-    })
+    }).then(res => res.json())
   ),
   login: (email, password) => (
     fetch(LOGIN_URL, {
       method: 'POST',
       headers: NON_AUTH_HEADER,
       body: JSON.stringify({ email, password }),
-    })
+    }).then(res => res.json())
   ),
 };
 
