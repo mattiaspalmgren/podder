@@ -7,7 +7,7 @@ export const SEARCH_TERM = 'SEARCH_TERM';
 export const REQUEST_PODCASTS = 'REQUEST_PODCASTS';
 export const RECEIVE_PODCASTS = 'RECEIVE_PODCASTS';
 
-export function getUserPodcasts() {
+export function getPodcasts() {
   return function (dispatch) {
     PodderApi.getPodcasts()
       .then((res) => {

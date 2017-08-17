@@ -1,6 +1,6 @@
 import SessionHandler from '../plugins/sessionHandler';
 import PodderApi from '../plugins/podderApi';
-import { updatePodcasts, getUserPodcasts } from './podcastActions';
+import { updatePodcasts, getPodcasts } from './podcastActions';
 import { getEpisodes } from './episodesActions';
 
 export const AUTH_USER = 'AUTH_USER';
@@ -19,7 +19,7 @@ export function getUser() {
           dispatch({ type: GET_USER_ERROR, payload: res.error });
         } else {
           dispatch({ type: GET_USER, payload: res.user });
-          dispatch(getUserPodcasts());
+          dispatch(getPodcasts());
         }
       });
   };
@@ -49,6 +49,7 @@ export function registerUser({ email, password }) {
           dispatch({ type: AUTH_ERROR, payload: res.error });
         } else {
           dispatch({ type: AUTH_USER, payload: res.user });
+          console.log(res.token);
           SessionHandler.saveJwt(res.token);
         }
       });

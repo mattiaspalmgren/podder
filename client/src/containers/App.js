@@ -15,9 +15,11 @@ import Header from '../components/Header';
 
 class App extends Component {
   componentDidMount() {
-    const { initPodcasts, initUser } = this.props;
+    const { initPodcasts, initUser, authenticated } = this.props;
+    if (authenticated) {
+      initUser();
+    }
     initPodcasts('P3');
-    initUser();
   }
 
   render() {

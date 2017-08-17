@@ -10,7 +10,7 @@ const EPISODES_URL = `${PODCASTS_URL}/episodes`;
 
 /* eslint-disable */
 
-const AUTH_HEADER = new Headers({
+const AUTH_HEADER = () => new Headers({
   'Authorization': SessionHandler.getJwt(),
   'Accept': 'application/json',
   'Content-Type': 'application/json'
@@ -27,13 +27,13 @@ const PodderApi = {
   getUser: () => (
     fetch(USER_URL, {
       method: 'GET',
-      headers: AUTH_HEADER,
+      headers: AUTH_HEADER(),
     }).then(res => res.json())
   ),
   updateUser: updateHash => (
     fetch(USER_URL, {
       method: 'PUT',
-      headers: AUTH_HEADER,
+      headers: AUTH_HEADER(),
       body: JSON.stringify({ data: updateHash }),
     }).then(res => res.json())
   ),
@@ -54,20 +54,20 @@ const PodderApi = {
   getPodcasts: () => (
     fetch(PODCASTS_URL, {
       method: 'GET',
-      headers: AUTH_HEADER,
+      headers: AUTH_HEADER(),
     }).then(res => res.json())
   ),
   getFeed: metaEpisodes => (
     fetch(FEED_URL, {
       method: 'POST',
-      headers: AUTH_HEADER,
+      headers: AUTH_HEADER(),
       body: JSON.stringify({ metaEpisodes }),
     }).then(res => res.json())
   ),
   getEpisodes: metaEpisode => (
     fetch(EPISODES_URL, {
       method: 'POST',
-      headers: AUTH_HEADER,
+      headers: AUTH_HEADER(),
       body: JSON.stringify({ metaEpisode }),
     }).then(res => res.json())
   ),
