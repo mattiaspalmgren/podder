@@ -1,11 +1,15 @@
 import { UPDATE_EPISODES, REQUEST_EPISODES, RECEIVE_EPISODES } from '../actions/episodesActions';
 
+function sortByDate(collection) {
+  return collection.sort(e => Date.parse(e.pubDate[0]));
+}
+
 function xor(collections, collection) {
   const updateCollectionId = collection[0].collectionId;
   const included = collections.map(p => p.collectionId).includes(updateCollectionId);
   return included ?
     collections.filter(p => p.collectionId !== updateCollectionId) :
-    collections.concat(collection);
+    sortByDate(collections.concat(collection));
 }
 
 export default function episodes(state = {
