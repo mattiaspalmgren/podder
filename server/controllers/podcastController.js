@@ -22,19 +22,42 @@ exports.get = (req, res) => {
     });
 };
 
+function addIdToEpisodes(index, collectionIds, episodes) {
+  return episodes.map((object) => {
+    object.collectionId = collectionIds[index]; //eslint-disable-line
+    return object;
+  });
+}
+
 exports.getFeed = (req, res) => {
-  const feedUrls = req.body.feedUrls;
+  const feedUrls = req.body.metaEpisodes.map(e => e.feedUrl);
+  const collectionIds = req.body.metaEpisodes.map(e => e.collectionId);
   Promise.all(feedUrls.map(url => fetch(url)))
     .then(resp => Promise.all(resp.map(r => r.text())))
     .then((results) => {
       let episodes = [];
-      results.forEach((xmlString) => {
+      results.forEach((xmlString, index) => {
         parseString(xmlString, (err, result) => {
-          const episodesObjects = result.rss.channel[0].item.slice(1, 5);
+          let episodesObjects = result.rss.channel[0].item.slice(1, 5);
+          episodesObjects = addIdToEpisodes(index, collectionIds, episodesObjects);
           episodes = episodes.concat(episodesObjects);
         });
       });
       const sortedEpisodes = episodes.sort(e => Date.parse(e.pubDate[0]));
       res.status(200).json({ episodes: sortedEpisodes });
+    });
+};
+
+exports.getEpisodes = (req, res) => {
+  const collectionId = req.body.metaEpisode.collectionId;
+  const feedUrl = req.body.metaEpisode.feedUrl;
+  fetch(feedUrl)
+    .then(resp => resp.text())
+    .then((xmlString) => {
+      parseString(xmlString, (err, result) => {
+        let episodesObjects = result.rss.channel[0].item.slice(1, 5);
+        episodesObjects = addIdToEpisodes(0, [collectionId], episodesObjects);
+        res.status(200).json({ episodes: episodesObjects });
+      });
     });
 };

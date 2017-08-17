@@ -1,6 +1,7 @@
 import SessionHandler from '../plugins/sessionHandler';
 import PodderApi from '../plugins/podderApi';
 import { updatePodcasts, getUserPodcasts } from './podcastActions';
+import { getEpisodes } from './episodesActions';
 
 export const AUTH_USER = 'AUTH_USER';
 export const UNAUTH_USER = 'UNAUTH_USER';
@@ -34,6 +35,7 @@ export function updateUser(podcast) {
         } else {
           dispatch({ type: UPDATE_USER, payload: res.user });
           dispatch(updatePodcasts(podcast));
+          dispatch(getEpisodes(podcast));
         }
       });
   };

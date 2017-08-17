@@ -12,8 +12,13 @@ export function getUserPodcasts() {
     PodderApi.getPodcasts()
       .then((res) => {
         dispatch({ type: GET_PODCASTS, payload: res.podcasts });
-        const feedUrls = res.podcasts.map(p => p.feedUrl);
-        dispatch(getFeed(feedUrls));
+        const metaEpisodes = res.podcasts.map(p => (
+          {
+            feedUrl: p.feedUrl,
+            collectionId: p.collectionId,
+          }
+        ));
+        dispatch(getFeed(metaEpisodes));
       });
   };
 }

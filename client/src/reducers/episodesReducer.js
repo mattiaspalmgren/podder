@@ -1,4 +1,12 @@
-import { REQUEST_EPISODES, RECEIVE_EPISODES } from '../actions/episodesActions';
+import { UPDATE_EPISODES, REQUEST_EPISODES, RECEIVE_EPISODES } from '../actions/episodesActions';
+
+function xor(collections, collection) {
+  const updateCollectionId = collection[0].collectionId;
+  const included = collections.map(p => p.collectionId).includes(updateCollectionId);
+  return included ?
+    collections.filter(p => p.collectionId !== updateCollectionId) :
+    collections.concat(collection);
+}
 
 export default function episodes(state = {
   isFetching: false,
@@ -7,6 +15,8 @@ export default function episodes(state = {
   switch (action.type) {
     case RECEIVE_EPISODES:
       return { episodes: action.episodes, isFetching: false };
+    case UPDATE_EPISODES:
+      return { episodes: xor(state.episodes, action.episodes), isFetching: false };
     case REQUEST_EPISODES:
       return { ...state, isFetching: true };
     default:

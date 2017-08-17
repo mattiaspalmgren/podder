@@ -5,7 +5,8 @@ const USER_URL = `${API_URL}/user`;
 const REGISTER_URL = `${API_URL}/register`;
 const LOGIN_URL = `${API_URL}/login`;
 const PODCASTS_URL = `${API_URL}/podcasts`;
-const FEED_URL = `${PODCASTS_URL}/episodes`;
+const FEED_URL = `${PODCASTS_URL}/feed`;
+const EPISODES_URL = `${PODCASTS_URL}/episodes`;
 
 /* eslint-disable */
 
@@ -56,11 +57,18 @@ const PodderApi = {
       headers: AUTH_HEADER,
     }).then(res => res.json())
   ),
-  getFeed: feedUrls => (
+  getFeed: metaEpisodes => (
     fetch(FEED_URL, {
       method: 'POST',
       headers: AUTH_HEADER,
-      body: JSON.stringify({ feedUrls }),
+      body: JSON.stringify({ metaEpisodes }),
+    }).then(res => res.json())
+  ),
+  getEpisodes: metaEpisode => (
+    fetch(EPISODES_URL, {
+      method: 'POST',
+      headers: AUTH_HEADER,
+      body: JSON.stringify({ metaEpisode }),
     }).then(res => res.json())
   ),
 };
