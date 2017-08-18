@@ -33,7 +33,8 @@ class EpisodesList extends Component {
     const getAltAuthor = episode =>
       metaPodcasts.find(mp => mp.collectionId === episode.collectionId).collectionName;
     const currentEpisodes = episodes.slice(0, this.state.amount);
-
+    const shouldRenderReadMore = !isFetching && episodes.length !== 0
+      && (episodes.length !== this.state.amount);
     return (
       <div className="grid episode-list">
         {
@@ -48,10 +49,10 @@ class EpisodesList extends Component {
             />
           ))
         }
-        { !isFetching && !(episodes.length === this.state.amount) &&
-          <div onClick={this.showMore}>
+        { shouldRenderReadMore &&
+          (<div onClick={this.showMore}>
             <Svg color={'grey'} type={'expand'} size={'large'} />
-          </div>
+          </div>)
         }
       </div>
     );
