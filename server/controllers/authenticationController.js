@@ -7,9 +7,7 @@ require('../config/passport');
 
 function generateToken(user) {
   const { _id, email } = user;
-  return jwt.sign({ _id, email }, config.secret, {
-    expiresIn: 10080,
-  });
+  return jwt.sign({ _id, email }, config.secret, { expiresIn: 10080 });
 }
 
 function setUserInfo(request) {
@@ -19,8 +17,6 @@ function setUserInfo(request) {
     subscribedIds: request.subscribedIds,
   };
 }
-
-// Login Route
 
 exports.login = (req, res, next) => {
   passport.authenticate('local', { session: false }, (err, user) => {
@@ -35,49 +31,29 @@ exports.login = (req, res, next) => {
   })(req, res, next);
 };
 
-// Registration Route
-
 exports.register = (req, res, next) => {
-  const email = req.body.email;
-  const password = req.body.password;
+  const { email, password } = req.body;
+  User.findOne({ email })
+    .then((existingUser, findErr) => {
+      if (findErr) { return next(findErr); }
+      if (existingUser) { return res.status(422).send({ error: 'That email address is already in use.' }); }
 
-  // Validation
-  if (!email) { return res.status(422).send({ error: 'You must enter an email address.' }); }
-  if (!password) { return res.status(422).send({ error: 'You must enter a password.' }); }
-
-  User.findOne({ email }, (findErr, existingUser) => {
-    if (findErr) { return next(findErr); }
-    if (existingUser) { return res.status(422).send({ error: 'That email address is already in use.' }); }
-
-    const user = new User({
-      email,
-      password,
-    });
-
-    user.save((saveErr, userObj) => {
-      if (saveErr) { return next(saveErr); }
-      const userInfo = setUserInfo(userObj);
-      res.status(201).json({
-        token: `JWT ${generateToken(userInfo)}`,
-        user: userInfo,
+      const user = new User({ email, password });
+      user.save((saveErr, userObj) => {
+        if (saveErr) { return next(saveErr); }
+        const userInfo = setUserInfo(userObj);
+        res.status(201).json({ token: `JWT ${generateToken(userInfo)}`, user: userInfo });
       });
     });
-  });
 };
-
-// JWT Auth Route
 
 exports.requireAuth = (req, res, next) => {
   const token = req.get('authorization');
-  if (token) {
-    jwt.verify(token, config.secret, (err, decoded) => {
-      if (err) {
-        return res.json({ success: false, message: 'Failed to authenticate token.' });
-      } else { //eslint-disable-line
-        req.decoded = decoded;
-        next();
-      }
-    });
-  } else { return res.status(403).send({ success: false, message: 'No token provided.' }); }
-};
+  if (!token) { return res.status(403).send({ success: false, message: 'No token provided.' }); }
 
+  jwt.verify(token, config.secret, (err, decoded) => {
+    if (err) { return res.status(403).send(({ success: false, message: 'Failed to authenticate token.' })); }
+    req.decoded = decoded;
+    next();
+  });
+};
