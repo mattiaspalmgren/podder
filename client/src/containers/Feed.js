@@ -10,7 +10,7 @@ const Feed = ({ episodes, isFetching, metaPodcasts }) => (
         <i className="spinner" />
       </div>
     }
-    <EpisodesList episodes={episodes} metaPodcasts={metaPodcasts} />
+    <EpisodesList episodes={episodes} metaPodcasts={metaPodcasts} isFetching={isFetching} />
   </div>
 );
 
