@@ -38,4 +38,9 @@
     background-color: $light-grey;
     font-size: 0.9em;
   }
+
+  &__description-icon {
+    display: flex;
+    justify-content: flex-end;
+  }
 }
