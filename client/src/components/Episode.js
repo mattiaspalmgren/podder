@@ -23,7 +23,7 @@ class Episode extends Component {
   renderDescription() {
     const { episode } = this.props;
 
-    const orginalDescription = episode['itunes:summary'][0];
+    const orginalDescription = episode['itunes:summary'] ? episode['itunes:summary'][0] : episode.description[0];
     const truncatedDescription = `${orginalDescription.slice(0, (MAX_LENGTH_DESCRIPTION - 3))}...`;
     const needsExpansion = orginalDescription.length > MAX_LENGTH_DESCRIPTION;
     const type = this.state.expanded ? 'less' : 'expand';
@@ -43,7 +43,7 @@ class Episode extends Component {
   }
 
   render() {
-    const { episode } = this.props;
+    const { episode, altMeta } = this.props;
 
     const spinnerClasses = classNames(
       'spinner', {
@@ -57,12 +57,16 @@ class Episode extends Component {
 
     const imageUrl = episode['itunes:image'] ?
       episode['itunes:image'][0].$.href :
-      'http://static.libsyn.com/p/assets/4/5/2/2/45229106b173434f/p3-man-up-hour.jpg';
+      altMeta.artworkUrl600;
+
+    const author = episode['itunes:author'] ?
+      episode['itunes:author'] :
+      altMeta.collectionName;
 
     return (
       <div className="col col-6">
         <div className="episode__producer">
-          {episode['itunes:author']}
+          {author}
         </div>
         <div className="episode ">
           <i className={spinnerClasses} />
@@ -82,6 +86,7 @@ class Episode extends Component {
 
 Episode.propTypes = {
   episode: PropTypes.object.isRequired,
+  altMeta: PropTypes.object.isRequired,
 };
 
 export default Episode;
