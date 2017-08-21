@@ -39,5 +39,5 @@ exports.update = (req, res) => {
 exports.get = (req, res) => {
   const userId = req.decoded._id;
   User.findOne({ _id: ObjectId(userId) })
-  .then(modelInstance => accknowledge(res, modelInstance));
+    .then(modelInstance => accknowledge(res, modelInstance));
 };

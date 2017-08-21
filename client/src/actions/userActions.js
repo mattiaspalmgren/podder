@@ -49,7 +49,6 @@ export function registerUser({ email, password }) {
           dispatch({ type: AUTH_ERROR, payload: res.error });
         } else {
           dispatch({ type: AUTH_USER, payload: res.user });
-          console.log(res.token);
           SessionHandler.saveJwt(res.token);
         }
       });
